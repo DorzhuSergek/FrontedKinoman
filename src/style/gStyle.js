@@ -1,0 +1,208 @@
+import { StyleSheet } from "react-native";
+export const gStyle = StyleSheet.create({
+  tabNav: {
+    backgroundColor: "#38354B",
+    flex: 2,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingTop: 30,
+  },
+  textTabBar: {
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 25,
+  },
+  container: {
+    flex: 2,
+    backgroundColor: "#1C1A29",
+  },
+  headerText: {
+    color: "#DEDDDF",
+    fontSize: 21,
+    marginTop: 15,
+  },
+  image: {
+    width: 40,
+    height: 40,
+  },
+  containerHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingTop: 15,
+    paddingLeft: 15,
+  },
+  searchEtd: {
+    paddingTop: 25,
+    alignItems: "flex-end",
+    flexDirection: "row",
+  },
+  elementsHeader: {
+    paddingRight: 15,
+  },
+  logoHeader: {
+    paddingTop: 15,
+  },
+  popularImg: {
+    width: 150,
+    height: 200,
+  },
+  titleHomeScreen: {
+    color: "#DEDDDF",
+    fontSize: 12,
+    fontFamily: "Open Sans",
+  },
+  backgroundImage: {
+    width: 400,
+    height: 220,
+    resizeMode: "cover",
+    marginTop: 10,
+    marginLeft: 7,
+  },
+  posterImage: {
+    width: 150,
+    height: 240,
+    resizeMode: "contain",
+  },
+  textExtensions: {
+    color: "#777777",
+    fontSize: 15,
+    marginTop: 15,
+    marginRight: 15,
+  },
+  containerListText: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingLeft: 15,
+    paddingBottom: 10,
+  },
+  titleMovies: {
+    color: "#fff",
+    fontSize: 12,
+    textAlign: "center",
+    width: 150,
+  },
+  movieCard: {
+    width: 150,
+    height: 240,
+    marginLeft: 5,
+    marginRight: 5,
+  },
+  avatarImage: {
+    width: 150,
+    height: 150,
+    resizeMode: "contain",
+    borderRadius: 120,
+  },
+  textUserName: {
+    color: "#fff",
+    textAlign: "center",
+    fontSize: 24,
+  },
+  textUserEmail: {
+    fontSize: 14,
+    color: "#A8A8A8",
+  },
+  containerUserInfo: {
+    flexDirection: "row",
+    alignContent: "center",
+    margin: 15,
+  },
+  textUserContainer: {
+    alignContent: "center",
+    padding: 30,
+  },
+  backgroundMovieScreen: {
+    width: 415,
+    height: 375,
+    opacity: 0.5,
+  },
+  posterMovieScreen: {
+    width: 140,
+    height: 170,
+    position: "absolute",
+    marginTop: 205,
+    zIndex: 1,
+    marginLeft: 270,
+    resizeMode: "contain",
+  },
+  titleMoviesScreen: {
+    position: "absolute",
+    zIndex: 1,
+    marginTop: 170,
+    color: "white",
+    fontStyle: "normal",
+    marginLeft: 15,
+    fontSize: 21,
+  },
+  release_date: {
+    position: "absolute",
+    marginTop: 220,
+    zIndex: 1,
+    marginLeft: 27,
+    fontSize: 15,
+    color: "#DEDDDF",
+  },
+  starVote: {
+    width: 16,
+    height: 16,
+    marginRight: 5,
+    resizeMode: "contain",
+  },
+  voteStar: {
+    flexDirection: "row",
+    position: "absolute",
+    zIndex: 1,
+    marginTop: 245,
+    marginLeft: 15,
+  },
+  raiting: {
+    color: "#DEDDDF",
+  },
+  textHeaderMovieScreen: {
+    width: 270,
+  },
+  titleSinopsis: {
+    color: "#DEDDDF",
+    fontSize: 21,
+    marginLeft: 15,
+  },
+  textSinopsis: {
+    color: "#DEDDDF",
+    marginLeft: 15,
+  },
+  trailerText: {
+    color: "#DEDDDF",
+    fontSize: 21,
+    marginLeft: 15,
+    paddingTop: 15,
+    paddingBottom: 15,
+  },
+  profileActor: {
+    width: 100,
+    height: 150,
+    resizeMode: "contain",
+    alignContent: "center",
+    marginLeft: 5,
+  },
+  actorList: {
+    color: "#fff",
+    fontSize: 12,
+    textAlign: "center",
+    width: 100,
+  },
+  characrerList: {
+    color: "#777",
+    fontSize: 12,
+    textAlign: "center",
+    width: 100,
+  },
+  videotrailer: {
+    width: 400,
+    height: 200,
+    paddingTop: 20,
+    resizeMode: "center",
+  },
+});
