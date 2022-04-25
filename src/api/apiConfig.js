@@ -1,4 +1,4 @@
 const apiConfig = {
-  baseUrl: "http://127.0.0.1:8000",
+  baseUrl: "https://kinomanoat.herokuapp.com",
 };
 export default apiConfig;

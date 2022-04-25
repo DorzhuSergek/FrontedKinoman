@@ -4,13 +4,13 @@ import { useEffect, useState, useRef } from "react";
 import myApi from "../api/myApi";
 import { gStyle } from "../style/gStyle";
 import { useNavigation } from "@react-navigation/native";
-export default function PopularComponent() {
+export default function InMoviesComponents() {
   const navigation = useNavigation();
   const [movieItems, setMovieItems] = useState([]);
   useEffect(() => {
     const getMovies = async () => {
       try {
-        const response = await myApi.getMovieList();
+        const response = await myApi.getInCinemaMovies();
         setMovieItems(response);
       } catch {}
     };
@@ -19,8 +19,8 @@ export default function PopularComponent() {
   }, []);
   return (
     <View>
+      <Text style={gStyle.headerText}>В кино</Text>
       <FlatList
-        style={{ paddingTop: 50 }}
         data={movieItems}
         horizontal
         renderItem={({ item }) => (
@@ -28,10 +28,8 @@ export default function PopularComponent() {
             <TouchableOpacity
               onPress={() => navigation.navigate("MovieScreen", item)}
             >
-              <Image
-                source={{ uri: item.Background }}
-                style={gStyle.backgroundImage}
-              />
+              <Image source={{ uri: item.Poster }} style={gStyle.posterImage} />
+              <Text style={gStyle.titleMovies}>{item.Name}</Text>
             </TouchableOpacity>
           </View>
         )}

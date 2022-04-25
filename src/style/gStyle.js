@@ -21,6 +21,7 @@ export const gStyle = StyleSheet.create({
     color: "#DEDDDF",
     fontSize: 21,
     marginTop: 15,
+    marginLeft: 15,
   },
   image: {
     width: 40,
@@ -63,7 +64,7 @@ export const gStyle = StyleSheet.create({
   posterImage: {
     width: 150,
     height: 240,
-    resizeMode: "contain",
+    marginLeft: 15,
   },
   textExtensions: {
     color: "#777777",
@@ -83,6 +84,7 @@ export const gStyle = StyleSheet.create({
     fontSize: 12,
     textAlign: "center",
     width: 150,
+    marginLeft: 15,
   },
   movieCard: {
     width: 150,
@@ -133,7 +135,6 @@ export const gStyle = StyleSheet.create({
     zIndex: 1,
     marginTop: 170,
     color: "white",
-    fontStyle: "normal",
     marginLeft: 15,
     fontSize: 21,
   },
@@ -200,9 +201,32 @@ export const gStyle = StyleSheet.create({
     width: 100,
   },
   videotrailer: {
-    width: 400,
-    height: 200,
+    width: "100%",
+    height: 300,
     paddingTop: 20,
-    resizeMode: "center",
+    resizeMode: "contain",
+  },
+  avatarComments: {
+    width: 50,
+    height: 50,
+  },
+  commentsText: {
+    color: "#A4A3A9",
+  },
+  nameComments: {
+    color: "#DEDDDF",
+  },
+  commentsHeader: {
+    color: "white",
+    flexDirection: "row",
+    textAlign: "center",
+    alignItems: "center",
+    borderBottomColor: "#7F7D88",
+  },
+  commentsList: {
+    marginLeft: 15,
+    color: "#fff",
+    flex: 1,
+    zIndex: 2,
   },
 });

@@ -1,13 +1,12 @@
 import * as React from "react";
 import { View } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import HomeScreenNavigator from "./HomeScreenNavigator";
 import ExplorerScreen from "../screen/ExplorerScreen";
 import BookMarkScreen from "../screen/BookMarkScreen";
 import UserScreen from "../screen/UserScreen";
 import { gStyle } from "../style/gStyle";
 import { FontAwesome5 } from "@expo/vector-icons";
-import HomeScreen from "../screen/HomeScreen";
+import { HomeScreenNavigator } from "./HomeScreenNavigator";
 export const Navigator = () => {
   const Tab = createBottomTabNavigator();
   return (
@@ -24,7 +23,7 @@ export const Navigator = () => {
       >
         <Tab.Screen
           name="Home"
-          component={HomeScreen}
+          component={HomeScreenNavigator}
           options={{
             tabBarIcon: ({ focused }) => (
               <View>
@@ -45,21 +44,6 @@ export const Navigator = () => {
               <View>
                 <FontAwesome5
                   name="compass"
-                  size={25}
-                  color={focused ? "red" : "gray"}
-                />
-              </View>
-            ),
-          }}
-        />
-        <Tab.Screen
-          name="Bookmark Screen"
-          component={BookMarkScreen}
-          options={{
-            tabBarIcon: ({ focused }) => (
-              <View>
-                <FontAwesome5
-                  name="bookmark"
                   size={25}
                   color={focused ? "red" : "gray"}
                 />
