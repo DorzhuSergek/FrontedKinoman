@@ -65,6 +65,7 @@ export const gStyle = StyleSheet.create({
     width: 150,
     height: 240,
     marginLeft: 15,
+    zIndex: 1,
   },
   textExtensions: {
     color: "#777777",
@@ -133,7 +134,7 @@ export const gStyle = StyleSheet.create({
   titleMoviesScreen: {
     position: "absolute",
     zIndex: 1,
-    marginTop: 170,
+    marginTop: 240,
     color: "white",
     marginLeft: 15,
     fontSize: 21,
@@ -156,7 +157,7 @@ export const gStyle = StyleSheet.create({
     flexDirection: "row",
     position: "absolute",
     zIndex: 1,
-    marginTop: 245,
+    marginTop: 300,
     marginLeft: 15,
   },
   raiting: {
@@ -228,5 +229,20 @@ export const gStyle = StyleSheet.create({
     color: "#fff",
     flex: 1,
     zIndex: 2,
+  },
+  ExplorerTitleMovies: {
+    color: "white",
+    fontSize: 14,
+    textAlign: "center",
+    width: 240,
+    paddingTop: 15,
+  },
+  blockMovies: {
+    flexDirection: "row",
+    paddingBottom: 15,
+  },
+  searchInput: {
+    height: 50,
+    padding: 10,
   },
 });

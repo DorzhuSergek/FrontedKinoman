@@ -8,14 +8,12 @@ import BestMoviesComponents from "../components/BestMoviesComponents";
 export default function HomeScreen() {
   return (
     <View style={gStyle.container}>
-      <SafeAreaView>
-        <ScrollView>
-          <PopularComponent />
-          <InTrendComponents />
-          <InMoviesComponents />
-          <BestMoviesComponents />
-        </ScrollView>
-      </SafeAreaView>
+      <ScrollView>
+        <PopularComponent />
+        <InTrendComponents />
+        <InMoviesComponents />
+        <BestMoviesComponents />
+      </ScrollView>
     </View>
   );
 }
