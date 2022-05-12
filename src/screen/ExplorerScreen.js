@@ -51,6 +51,7 @@ export default function ExplorerScreen() {
             placeholder="Поиск"
             style={gStyle.searchInput}
             value={search}
+            placeholderTextColor="#E5E5E5"
             onChangeText={(text) => searchFilter(text)}
           ></TextInput>
           <FlatList
