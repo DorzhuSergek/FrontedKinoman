@@ -2,7 +2,6 @@ import * as React from "react";
 import { View } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import ExplorerScreen from "../screen/ExplorerScreen";
-import BookMarkScreen from "../screen/BookMarkScreen";
 import UserScreen from "../screen/UserScreen";
 import { gStyle } from "../style/gStyle";
 import { FontAwesome5 } from "@expo/vector-icons";

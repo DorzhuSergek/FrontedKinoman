@@ -14,7 +14,7 @@ export const gStyle = StyleSheet.create({
     padding: 25,
   },
   container: {
-    flex: 2,
+    flex: 1,
     backgroundColor: "#1C1A29",
   },
   headerText: {
@@ -244,5 +244,28 @@ export const gStyle = StyleSheet.create({
   searchInput: {
     height: 50,
     padding: 10,
+    color: "#FFFFFF",
+  },
+  inputDataAutho: {
+    borderColor: "#fff",
+    borderWidth: 1,
+    color: "#fff",
+    margin: 15,
+    padding: 15,
+  },
+  containerAuth: {
+    paddingTop: 50,
+    alignItems: "center",
+  },
+  imageRegistration: {
+    width: 200,
+    height: 200,
+    alignItems: "center",
+  },
+  buttonReg: {
+    color: "#000",
+  },
+  textInputContainer: {
+    marginBottom: 50,
   },
 });
