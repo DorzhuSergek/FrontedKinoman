@@ -258,8 +258,8 @@ export const gStyle = StyleSheet.create({
     alignItems: "center",
   },
   imageRegistration: {
-    width: 200,
-    height: 200,
+    width: 100,
+    height: 100,
     alignItems: "center",
   },
   buttonReg: {
