@@ -1,7 +1,17 @@
 import * as React from "react";
-import { Text, View } from "react-native";
+import { Text, View, Button } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { gStyle } from "../style/gStyle";
 
 export default function UserScreen() {
-  return <View style={gStyle.container}></View>;
+  const exit = async () => {
+    localStorage.removeItem("token");
+  };
+  return (
+    <View style={gStyle.container}>
+      <SafeAreaView>
+        <Button onPress={exit} title="Выход" />
+      </SafeAreaView>
+    </View>
+  );
 }

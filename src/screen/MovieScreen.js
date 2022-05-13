@@ -4,8 +4,10 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { gStyle } from "../style/gStyle";
 import { WebView } from "react-native-webview";
 import CommentsComponents from "../components/CommentsComponents";
+import AuthorizationScreen from "./AuthorizationScreen";
 
 export default function MovieScreen({ route }) {
+  console.log(localStorage.getItem("token"));
   return (
     <View style={gStyle.container}>
       <ScrollView>
