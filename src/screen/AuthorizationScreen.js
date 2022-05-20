@@ -3,10 +3,9 @@ import { View, TextInput, Image, Button } from "react-native";
 import { gStyle } from "../style/gStyle";
 import apiConfig from "../api/apiConfig";
 import { useNavigation } from "@react-navigation/native";
-import "localstorage-polyfill";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function AuthorizationScreen() {
+  const navigation = useNavigation();
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   let token = "";
@@ -28,11 +27,17 @@ export default function AuthorizationScreen() {
         .then((data) => {
           token = data.access_token;
           localStorage.setItem("token", token);
+          console.log(localStorage.getItem("token"));
+          if (token != null) {
+            console.log(token);
+            navigation.navigate("TabBarNavigator");
+          } else {
+            console.log("Ошибка");
+          }
         });
     } catch (error) {
       console.error(error);
     }
-    console.log(localStorage.getItem("token"));
   };
 
   return (
@@ -65,6 +70,10 @@ export default function AuthorizationScreen() {
         title="Авторизоваться"
         style={gStyle.buttonReg}
         onPress={getToken}
+      />
+      <Button
+        title="Регистрация"
+        onPress={() => navigation.navigate("RegistrationScreen")}
       />
     </View>
   );

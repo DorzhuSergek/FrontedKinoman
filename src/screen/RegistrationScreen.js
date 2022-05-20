@@ -4,7 +4,6 @@ import { gStyle } from "../style/gStyle";
 import myApi from "../api/myApi";
 import apiConfig from "../api/apiConfig";
 import { SafeAreaView } from "react-native-safe-area-context";
-
 export default function RegistrationScreen() {
   const baseUrlAuth = apiConfig.baseUrl + apiConfig.registration;
   const [name, setName] = useState("");
