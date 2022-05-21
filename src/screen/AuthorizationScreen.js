@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, TextInput, Image, Button } from "react-native";
+import { View, TextInput, Image, Button, ToastAndroid } from "react-native";
 import { gStyle } from "../style/gStyle";
 import apiConfig from "../api/apiConfig";
 import { useNavigation } from "@react-navigation/native";
@@ -27,15 +27,14 @@ export default function AuthorizationScreen() {
         .then((data) => {
           token = data.access_token;
           localStorage.setItem("token", token);
-          console.log(localStorage.getItem("token"));
           if (token != null) {
             console.log(token);
-            navigation.navigate("TabBarNavigator");
           } else {
-            console.log("Ошибка");
+            ToastAndroid.show("Повторите попытку", ToastAndroid.SHORT);
           }
         });
     } catch (error) {
+      ToastAndroid.show("Повторите попытку", ToastAndroid.SHORT);
       console.error(error);
     }
   };
