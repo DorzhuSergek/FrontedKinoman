@@ -3,6 +3,7 @@ import { View, TextInput, Image, Button, ToastAndroid } from "react-native";
 import { gStyle } from "../style/gStyle";
 import apiConfig from "../api/apiConfig";
 import { useNavigation } from "@react-navigation/native";
+import { TabBarNavigato } from "../navigator/TabBarNavigator";
 
 export default function AuthorizationScreen() {
   const navigation = useNavigation();
@@ -29,6 +30,7 @@ export default function AuthorizationScreen() {
           localStorage.setItem("token", token);
           if (token != null) {
             console.log(token);
+            navigation.navigate("TabBarNavigato");
           } else {
             ToastAndroid.show("Повторите попытку", ToastAndroid.SHORT);
           }
