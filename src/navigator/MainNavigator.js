@@ -9,7 +9,7 @@ import * as SecureStore from "expo-secure-store";
 
 export const MainNavigator = () => {
   const Stack = createStackNavigator();
-  const [result, setResult] = useState();
+  let [result, setResult] = useState();
   async function getValueFor(key) {
     setResult = await SecureStore.getItemAsync(key);
     if (result) {
@@ -17,7 +17,6 @@ export const MainNavigator = () => {
     } else {
       alert("No values stored under that key.");
     }
-    console.log(result);
   }
   getValueFor("token");
   return (

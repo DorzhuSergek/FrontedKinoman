@@ -10,7 +10,15 @@ export default function RegistrationScreen() {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [password2, setPassword2] = useState("");
-  let token = localStorage.getItem("token");
+  let result;
+  async function getValueFor(key) {
+    result = await SecureStore.getItemAsync(key);
+    if (result) {
+      alert("🔐 Here's your value 🔐 \n" + result);
+    } else {
+      alert("No values stored under that key.");
+    }
+  }
   const registration = async () => {
     try {
       const h1 = await fetch(baseUrlAuth, {
@@ -30,6 +38,7 @@ export default function RegistrationScreen() {
         .then((data) => {
           console.log(data);
           console.log("Успешно");
+          getValueFor("token");
         });
     } catch (error) {
       console.error(error);
@@ -38,7 +47,7 @@ export default function RegistrationScreen() {
   return (
     <View style={gStyle.container}>
       <SafeAreaView>
-        <Text>{token}</Text>
+        <Text>{result}</Text>
         <View style={gStyle.containerAuth}>
           <Image
             source={{

@@ -21,7 +21,6 @@ export default function AuthorizationScreen() {
       alert("No values stored under that key.");
     }
   }
-  getValueFor("token");
   const getToken = async () => {
     try {
       const h1 = await fetch(baseUrlAuth, {
@@ -41,6 +40,8 @@ export default function AuthorizationScreen() {
           save("token", token);
           if (token != null) {
             console.log(token);
+            getValueFor("token");
+
             navigation.navigate("TabBarNavigato");
           } else {
             ToastAndroid.show("Повторите попытку", ToastAndroid.SHORT);
