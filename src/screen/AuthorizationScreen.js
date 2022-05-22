@@ -4,6 +4,7 @@ import { gStyle } from "../style/gStyle";
 import apiConfig from "../api/apiConfig";
 import { useNavigation } from "@react-navigation/native";
 import { TabBarNavigato } from "../navigator/TabBarNavigator";
+import * as SecureStore from "expo-secure-store";
 
 export default function AuthorizationScreen() {
   const navigation = useNavigation();
@@ -11,6 +12,16 @@ export default function AuthorizationScreen() {
   const [password, setPassword] = useState("");
   let token = "";
   const baseUrlAuth = apiConfig.baseUrl + apiConfig.login;
+  let result;
+  async function getValueFor(key) {
+    result = await SecureStore.getItemAsync(key);
+    if (result) {
+      alert("🔐 Here's your value 🔐 \n" + result);
+    } else {
+      alert("No values stored under that key.");
+    }
+  }
+  getValueFor("token");
   const getToken = async () => {
     try {
       const h1 = await fetch(baseUrlAuth, {
@@ -27,7 +38,7 @@ export default function AuthorizationScreen() {
         .then((response) => response.json())
         .then((data) => {
           token = data.access_token;
-          localStorage.setItem("token", token);
+          save("token", token);
           if (token != null) {
             console.log(token);
             navigation.navigate("TabBarNavigato");
@@ -40,7 +51,9 @@ export default function AuthorizationScreen() {
       console.error(error);
     }
   };
-
+  async function save(key, value) {
+    await SecureStore.setItemAsync(key, value);
+  }
   return (
     <View style={gStyle.container}>
       <View style={gStyle.containerAuth}>

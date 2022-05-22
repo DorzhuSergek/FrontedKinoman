@@ -5,7 +5,6 @@ import RegistrationScreen from "../screen/RegistrationScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import { useNavigation } from "@react-navigation/native";
 import { TabBarNavigato } from "./TabBarNavigator";
-import UserScreen from "../screen/UserScreen";
 
 const Stack = createStackNavigator();
 const screenOptionStyle = {
@@ -32,13 +31,6 @@ export const StartScreenNavigator = () => {
       <Stack.Screen
         name="TabBarNavigato"
         component={TabBarNavigato}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <Stack.Screen
-        name="UserScreen"
-        component={UserScreen}
         options={{
           headerShown: false,
         }}

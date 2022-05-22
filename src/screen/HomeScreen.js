@@ -6,7 +6,6 @@ import InTrendComponents from "../components/InTrendComponents";
 import InMoviesComponents from "../components/InMoviesComponents";
 import BestMoviesComponents from "../components/BestMoviesComponents";
 export default function HomeScreen() {
-  console.log(localStorage.getItem("token"));
   return (
     <View style={gStyle.container}>
       <ScrollView>

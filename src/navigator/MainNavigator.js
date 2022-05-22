@@ -5,20 +5,29 @@ import { TabBarNavigato } from "./TabBarNavigator";
 import { StartScreenNavigator } from "./StartScreenNavigator";
 import { NavigationContainer } from "@react-navigation/native";
 import { gStyle } from "../style/gStyle";
+import * as SecureStore from "expo-secure-store";
 
 export const MainNavigator = () => {
   const Stack = createStackNavigator();
-  let token = localStorage.getItem("token");
-  // let [token, setToken] = useState("");
-  // setToken = localStorage.getItem("token");
+  const [result, setResult] = useState();
+  async function getValueFor(key) {
+    setResult = await SecureStore.getItemAsync(key);
+    if (result) {
+      alert("🔐 Here's your value 🔐 \n" + result);
+    } else {
+      alert("No values stored under that key.");
+    }
+    console.log(result);
+  }
+  getValueFor("token");
   return (
     <View style={gStyle.container}>
       <NavigationContainer>
         <Stack.Navigator>
-          {token == null ? (
+          {result == null ? (
             <>
               <Stack.Screen
-                name="Auth"
+                name="StartScreenNavigator"
                 component={StartScreenNavigator}
                 options={{
                   headerShown: false,
@@ -28,7 +37,7 @@ export const MainNavigator = () => {
           ) : (
             <>
               <Stack.Screen
-                name="Tab"
+                name="TabBarNavigato"
                 component={TabBarNavigato}
                 options={{
                   headerShown: false,
