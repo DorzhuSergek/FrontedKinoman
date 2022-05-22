@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { View, TextInput, Image, Button, ToastAndroid } from "react-native";
+import {
+  View,
+  TextInput,
+  Image,
+  Button,
+  ToastAndroid,
+  Alert,
+} from "react-native";
 import { gStyle } from "../style/gStyle";
 import apiConfig from "../api/apiConfig";
 import { useNavigation } from "@react-navigation/native";
@@ -44,7 +51,7 @@ export default function AuthorizationScreen() {
 
             navigation.navigate("TabBarNavigato");
           } else {
-            ToastAndroid.show("Повторите попытку", ToastAndroid.SHORT);
+            Alert.alert("Ошибка", "Неверные данные");
           }
         });
     } catch (error) {
