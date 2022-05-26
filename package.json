@@ -17,6 +17,7 @@
     "@react-navigation/stack": "^6.2.1",
     "axios": "^0.26.1",
     "expo": "~44.0.0",
+    "expo-secure-store": "~11.1.0",
     "expo-status-bar": "~1.2.0",
     "localstorage-polyfill": "^1.0.1",
     "react": "17.0.1",
@@ -28,7 +29,8 @@
     "react-native-screens": "~3.10.1",
     "react-native-web": "0.17.1",
     "react-native-webview": "^11.18.1",
-    "react-navigation": "^4.4.4"
+    "react-navigation": "^4.4.4",
+    "react-toastify": "^9.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"

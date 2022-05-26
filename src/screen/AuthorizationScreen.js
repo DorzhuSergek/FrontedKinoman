@@ -1,19 +1,42 @@
-import React, { useState } from "react";
-import { View, TextInput, Image, Button } from "react-native";
+import React, { useState, useEffect } from "react";
+import {
+  View,
+  TextInput,
+  Image,
+  Button,
+  ToastAndroid,
+  Alert,
+  Text,
+} from "react-native";
 import { gStyle } from "../style/gStyle";
 import apiConfig from "../api/apiConfig";
 import { useNavigation } from "@react-navigation/native";
-import "localstorage-polyfill";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as SecureStore from "expo-secure-store";
 
 export default function AuthorizationScreen() {
+  const navigation = useNavigation();
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
-  let token = "";
   const baseUrlAuth = apiConfig.baseUrl + apiConfig.login;
+
+  let isAuth;
+  let token = "";
+
+  async function save(key, value) {
+    await SecureStore.setItemAsync(key, value);
+  }
+
+  async function getValueFor(key) {
+    let result = await SecureStore.getItemAsync(key);
+    isAuth = result;
+  }
+  React.useEffect(() => {
+    getValueFor("token");
+  });
+
   const getToken = async () => {
     try {
-      const h1 = await fetch(baseUrlAuth, {
+      await fetch(baseUrlAuth, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -27,12 +50,17 @@ export default function AuthorizationScreen() {
         .then((response) => response.json())
         .then((data) => {
           token = data.access_token;
-          localStorage.setItem("token", token);
+          save("token", token);
+          if (token != null) {
+            navigation.navigate("TabBarNavigato");
+          } else {
+            Alert.alert("Ошибка", "Неверные данные");
+          }
         });
     } catch (error) {
+      ToastAndroid.show("Повторите попытку", ToastAndroid.SHORT);
       console.error(error);
     }
-    console.log(localStorage.getItem("token"));
   };
 
   return (
@@ -64,8 +92,13 @@ export default function AuthorizationScreen() {
       <Button
         title="Авторизоваться"
         style={gStyle.buttonReg}
-        onPress={getToken}
+        onPress={() => getToken()}
       />
+      <Button
+        title="Регистрация"
+        onPress={() => navigation.navigate("RegistrationScreen")}
+      />
+      <Text>{isAuth}</Text>
     </View>
   );
 }

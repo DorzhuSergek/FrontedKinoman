@@ -1,16 +1,16 @@
 import React, { useState } from "react";
-import { View, TextInput, Image, Button } from "react-native";
+import { View, TextInput, Image, Button, Text } from "react-native";
 import { gStyle } from "../style/gStyle";
 import myApi from "../api/myApi";
 import apiConfig from "../api/apiConfig";
 import { SafeAreaView } from "react-native-safe-area-context";
-
 export default function RegistrationScreen() {
   const baseUrlAuth = apiConfig.baseUrl + apiConfig.registration;
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [password2, setPassword2] = useState("");
+
   const registration = async () => {
     try {
       const h1 = await fetch(baseUrlAuth, {
@@ -30,6 +30,7 @@ export default function RegistrationScreen() {
         .then((data) => {
           console.log(data);
           console.log("Успешно");
+          getValueFor("token");
         });
     } catch (error) {
       console.error(error);
@@ -38,6 +39,7 @@ export default function RegistrationScreen() {
   return (
     <View style={gStyle.container}>
       <SafeAreaView>
+        <Text>{result}</Text>
         <View style={gStyle.containerAuth}>
           <Image
             source={{
