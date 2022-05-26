@@ -268,4 +268,8 @@ export const gStyle = StyleSheet.create({
   textInputContainer: {
     marginBottom: 50,
   },
+  containerForComments: {
+    margin: 25,
+    backgroundColor: "#242135",
+  },
 });
