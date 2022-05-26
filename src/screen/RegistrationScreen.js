@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { View, TextInput, Image, Button, Text } from "react-native";
 import { gStyle } from "../style/gStyle";
-import myApi from "../api/myApi";
 import apiConfig from "../api/apiConfig";
 import { SafeAreaView } from "react-native-safe-area-context";
 export default function RegistrationScreen() {
@@ -13,7 +12,7 @@ export default function RegistrationScreen() {
 
   const registration = async () => {
     try {
-      const h1 = await fetch(baseUrlAuth, {
+      await fetch(baseUrlAuth, {
         method: "POST",
         headers: {
           Accept: "application/json",

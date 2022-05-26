@@ -6,15 +6,15 @@ import { useNavigation } from "@react-navigation/native";
 import * as SecureStore from "expo-secure-store";
 
 export default function UserScreen() {
-  let result;
-
+  const navigation = useNavigation();
   const exit = async () => {
     SecureStore.deleteItemAsync("token");
+    navigation.navigate("AuthorizationScreen");
   };
   return (
     <View style={gStyle.container}>
       <SafeAreaView>
-        <Button onPress={exit} title="Выход" />
+        <Button onPress={() => exit()} title="Выход" />
       </SafeAreaView>
     </View>
   );

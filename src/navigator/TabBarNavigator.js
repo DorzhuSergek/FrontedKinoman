@@ -8,6 +8,7 @@ import ExplorerScreen from "../screen/ExplorerScreen";
 import UserScreen from "../screen/UserScreen";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { gStyle } from "../style/gStyle";
+import { Exit } from "./Exit";
 
 export const TabBarNavigato = () => {
   const Stack = createStackNavigator();
@@ -57,7 +58,7 @@ export const TabBarNavigato = () => {
         />
         <Tab.Screen
           name="User"
-          component={UserScreen}
+          component={Exit}
           options={{
             tabBarIcon: ({ focused }) => (
               <View>
