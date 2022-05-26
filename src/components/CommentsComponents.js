@@ -60,7 +60,6 @@ const CommentsComponents = (props) => {
   };
   return (
     <View style={gStyle.containerForComments}>
-      <Text>{user}</Text>
       <FlatList
         data={items}
         keyExtractor={(index) => index.toString()}
