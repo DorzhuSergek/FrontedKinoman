@@ -1,9 +1,13 @@
 import React, { useState } from "react";
-import { View, TextInput, Image, Button, Text } from "react-native";
+import { View, TextInput, Image, Button, Alert } from "react-native";
 import { gStyle } from "../style/gStyle";
 import apiConfig from "../api/apiConfig";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useNavigation } from "@react-navigation/native";
+
 export default function RegistrationScreen() {
+  const navigation = useNavigation();
+
   const baseUrlAuth = apiConfig.baseUrl + apiConfig.registration;
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
@@ -28,8 +32,8 @@ export default function RegistrationScreen() {
         .then((response) => response.json())
         .then((data) => {
           console.log(data);
-          console.log("Успешно");
-          getValueFor("token");
+          Alert.alert("Успешно", "Введите данные");
+          navigation.navigate("AuthorizationScreen");
         });
     } catch (error) {
       console.error(error);
@@ -38,7 +42,6 @@ export default function RegistrationScreen() {
   return (
     <View style={gStyle.container}>
       <SafeAreaView>
-        <Text>{result}</Text>
         <View style={gStyle.containerAuth}>
           <Image
             source={{
@@ -62,10 +65,12 @@ export default function RegistrationScreen() {
         <TextInput
           placeholderTextColor="#A8A8A8"
           placeholder="Пароль"
+          secureTextEntry={true}
           style={gStyle.inputDataAutho}
           onChangeText={(value) => setPassword(value)}
         />
         <TextInput
+          secureTextEntry={true}
           placeholderTextColor="#A8A8A8"
           placeholder="Повторите пароль"
           style={gStyle.inputDataAutho}
