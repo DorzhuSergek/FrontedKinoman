@@ -1,28 +1,67 @@
-import React from "react";
-import { FlatList, Text, View, Image, TouchableOpacity } from "react-native";
-import { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
+import {
+  FlatList,
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+  TextInput,
+  Button,
+} from "react-native";
 import myApi from "../api/myApi";
 import { gStyle } from "../style/gStyle";
 import PropTypes from "prop-types";
+import * as SecureStore from "expo-secure-store";
+import apiConfig from "../api/apiConfig";
 
 const CommentsComponents = (props) => {
-  const [item, setItems] = useState([]);
-  let user = "";
+  const [items, setItems] = useState([]);
+  const [text, setText] = useState();
+  let [user, setUser] = useState();
+  const baseUrl = apiConfig.baseUrl + apiConfig.createComment + props.idMovies;
+  async function getValueFor(key) {
+    let result = await SecureStore.getItemAsync(key).then((user) =>
+      setUser(user)
+    );
+    user = result;
+  }
   useEffect(() => {
     const getList = async () => {
-      let response = null;
       try {
-        response = await myApi.getCommets(props.idMovies);
+        const response = await myApi.getCommets(props.idMovies);
         setItems(response);
-      } catch {}
+      } catch (e) {
+        alert(e);
+      }
+      getValueFor("token");
     };
     getList();
   }, []);
-
+  const createComment = async () => {
+    try {
+      await fetch(
+        "https://kinomanoat.herokuapp.com/comments/{MovieId}?movieId=" +
+          props.idMovies,
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + user,
+          },
+          body: JSON.stringify({
+            text: text,
+          }),
+        }
+      );
+    } catch (e) {
+      alert(e);
+    }
+  };
   return (
-    <View>
+    <View style={gStyle.containerForComments}>
       <FlatList
-        data={item}
+        data={items}
         keyExtractor={(index) => index.toString()}
         renderItem={({ item }) => (
           <View style={gStyle.commentsList}>
@@ -39,6 +78,12 @@ const CommentsComponents = (props) => {
           </View>
         )}
       ></FlatList>
+      <TextInput
+        style={gStyle.inputDataAutho}
+        placeholder="Отправить комментарий"
+        onChangeText={(value) => setText(value)}
+      />
+      <Button title="Отправить" onPress={() => createComment()} />
     </View>
   );
 };

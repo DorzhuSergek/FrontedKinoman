@@ -4,6 +4,7 @@ import { View } from "react-native";
 import UserScreen from "../screen/UserScreen";
 import AuthorizationScreen from "../screen/AuthorizationScreen";
 import { gStyle } from "../style/gStyle";
+
 export const Exit = () => {
   const Stack = createStackNavigator();
   const screenOptionStyle = {

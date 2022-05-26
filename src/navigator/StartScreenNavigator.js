@@ -2,8 +2,7 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import AuthorizationScreen from "../screen/AuthorizationScreen";
 import RegistrationScreen from "../screen/RegistrationScreen";
-import { NavigationContainer } from "@react-navigation/native";
-import { useNavigation } from "@react-navigation/native";
+
 import { TabBarNavigato } from "./TabBarNavigator";
 
 const Stack = createStackNavigator();

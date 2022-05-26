@@ -9,7 +9,6 @@ export default function UserScreen() {
   const navigation = useNavigation();
   const exit = async () => {
     SecureStore.deleteItemAsync("token");
-    navigation.navigate("AuthorizationScreen");
   };
   return (
     <View style={gStyle.container}>
