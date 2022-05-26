@@ -1,11 +1,9 @@
 import React from "react";
 import { View } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import { HomeScreenNavigator } from "./HomeScreenNavigator";
 import ExplorerScreen from "../screen/ExplorerScreen";
-import UserScreen from "../screen/UserScreen";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { gStyle } from "../style/gStyle";
 import { Exit } from "./Exit";
