@@ -7,19 +7,7 @@ import * as SecureStore from "expo-secure-store";
 
 export default function UserScreen() {
   let result;
-  async function getValueFor(key) {
-    result = await SecureStore.getItemAsync(key);
-    if (result) {
-      alert("🔐 Here's your value 🔐 \n" + result);
-    } else {
-      alert("No values stored under that key.");
-    }
-    console.log(result);
-  }
 
-  getValueFor("token");
-  // let [token, setToken] = useState("");
-  // setToken = localStorage.getItem("token");
   const exit = async () => {
     SecureStore.deleteItemAsync("token");
   };
@@ -27,7 +15,6 @@ export default function UserScreen() {
     <View style={gStyle.container}>
       <SafeAreaView>
         <Button onPress={exit} title="Выход" />
-        <Text>{result}</Text>
       </SafeAreaView>
     </View>
   );

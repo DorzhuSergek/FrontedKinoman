@@ -10,15 +10,7 @@ export default function RegistrationScreen() {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [password2, setPassword2] = useState("");
-  let result;
-  async function getValueFor(key) {
-    result = await SecureStore.getItemAsync(key);
-    if (result) {
-      alert("🔐 Here's your value 🔐 \n" + result);
-    } else {
-      alert("No values stored under that key.");
-    }
-  }
+
   const registration = async () => {
     try {
       const h1 = await fetch(baseUrlAuth, {

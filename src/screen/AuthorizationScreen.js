@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   TextInput,
@@ -6,31 +6,37 @@ import {
   Button,
   ToastAndroid,
   Alert,
+  Text,
 } from "react-native";
 import { gStyle } from "../style/gStyle";
 import apiConfig from "../api/apiConfig";
 import { useNavigation } from "@react-navigation/native";
-import { TabBarNavigato } from "../navigator/TabBarNavigator";
 import * as SecureStore from "expo-secure-store";
 
 export default function AuthorizationScreen() {
   const navigation = useNavigation();
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
-  let token = "";
   const baseUrlAuth = apiConfig.baseUrl + apiConfig.login;
-  let result;
-  async function getValueFor(key) {
-    result = await SecureStore.getItemAsync(key);
-    if (result) {
-      alert("🔐 Here's your value 🔐 \n" + result);
-    } else {
-      alert("No values stored under that key.");
-    }
+
+  let isAuth;
+  let token = "";
+
+  async function save(key, value) {
+    await SecureStore.setItemAsync(key, value);
   }
+
+  async function getValueFor(key) {
+    let result = await SecureStore.getItemAsync(key);
+    isAuth = result;
+  }
+  React.useEffect(() => {
+    getValueFor("token");
+  });
+
   const getToken = async () => {
     try {
-      const h1 = await fetch(baseUrlAuth, {
+      await fetch(baseUrlAuth, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -46,9 +52,6 @@ export default function AuthorizationScreen() {
           token = data.access_token;
           save("token", token);
           if (token != null) {
-            console.log(token);
-            getValueFor("token");
-
             navigation.navigate("TabBarNavigato");
           } else {
             Alert.alert("Ошибка", "Неверные данные");
@@ -59,9 +62,7 @@ export default function AuthorizationScreen() {
       console.error(error);
     }
   };
-  async function save(key, value) {
-    await SecureStore.setItemAsync(key, value);
-  }
+
   return (
     <View style={gStyle.container}>
       <View style={gStyle.containerAuth}>
@@ -91,12 +92,13 @@ export default function AuthorizationScreen() {
       <Button
         title="Авторизоваться"
         style={gStyle.buttonReg}
-        onPress={getToken}
+        onPress={() => getToken()}
       />
       <Button
         title="Регистрация"
         onPress={() => navigation.navigate("RegistrationScreen")}
       />
+      <Text>{isAuth}</Text>
     </View>
   );
 }

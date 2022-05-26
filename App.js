@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { Navigator } from "./src/navigator/Navigator";
 import AuthorizationScreen from "./src/screen/AuthorizationScreen";
@@ -13,6 +13,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import "localstorage-polyfill";
 import { TabBarNavigato } from "./src/navigator/TabBarNavigator";
 import { MainNavigator } from "./src/navigator/MainNavigator";
+import * as SecureStore from "expo-secure-store";
 
 export default function App() {
   return (
