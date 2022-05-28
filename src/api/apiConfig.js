@@ -3,5 +3,6 @@ const apiConfig = {
   login: "/login",
   registration: "/user",
   createComment: "/comments/",
+  chat: "/chat/",
 };
 export default apiConfig;

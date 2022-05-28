@@ -18,7 +18,6 @@ const CommentsComponents = (props) => {
   const [items, setItems] = useState([]);
   const [text, setText] = useState();
   let [user, setUser] = useState();
-  const baseUrl = apiConfig.baseUrl + apiConfig.createComment + props.idMovies;
   async function getValueFor(key) {
     let result = await SecureStore.getItemAsync(key).then((user) =>
       setUser(user)

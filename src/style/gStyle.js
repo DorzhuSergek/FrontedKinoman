@@ -286,4 +286,36 @@ export const gStyle = StyleSheet.create({
     color: "#777777",
     marginLeft: 15,
   },
+  chatTitleHeader: {
+    color: "white",
+    textAlign: "center",
+  },
+  chatMessageBox: {
+    width: "70%",
+    color: "white",
+    textAlignVertical: "center",
+  },
+  containerChatMessage: {
+    flexDirection: "row",
+  },
+  chatUser: {
+    color: "#969594",
+  },
+  containerUserData: {
+    width: "70%",
+    flexDirection: "row",
+    textAlign: "center",
+  },
+  containerChat: {
+    backgroundColor: "#2E2B2A",
+    margin: 5,
+  },
+  inputMessage: {
+    position: "relative",
+    bottom: 0,
+    borderColor: "#fff",
+    borderWidth: 1,
+    margin: 15,
+    padding: 15,
+  },
 });

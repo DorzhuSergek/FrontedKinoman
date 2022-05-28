@@ -21,6 +21,10 @@ const myApi = {
     const url = "comments/" + movieId;
     return axiosClient.get(url);
   },
+  getChat() {
+    const url = "/all_chats";
+    return axiosClient.get(url);
+  },
 };
 
 export default myApi;
