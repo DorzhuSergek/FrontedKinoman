@@ -1,14 +1,25 @@
 import React from "react";
-import { View, Text, Image, FlatList, TextInput } from "react-native";
+import { View, Text, Image, FlatList, TextInput, Button } from "react-native";
 import { gStyle } from "../style/gStyle";
 import { SafeAreaView } from "react-native-safe-area-context";
 import myApi from "../api/myApi";
 import { useEffect, useState, useRef } from "react";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import apiConfig from "../api/apiConfig";
+import * as SecureStore from "expo-secure-store";
 
 export const ChatComponent = () => {
   const [message, setMessage] = useState([]);
-
+  const [text, setText] = useState();
+  let [user, setUser] = useState();
+  const baseUrl = apiConfig.baseUrl + apiConfig.chat;
+  async function getValueFor(key) {
+    let result = await SecureStore.getItemAsync(key).then((user) =>
+      setUser(user)
+    );
+    user = result;
+    console.log(user);
+  }
   useEffect(() => {
     const getChat = async () => {
       try {
@@ -17,9 +28,26 @@ export const ChatComponent = () => {
       } catch (e) {
         alert(e);
       }
+      getValueFor("token");
     };
     getChat();
   }, []);
+  const postChat = async () => {
+    try {
+      await fetch(baseUrl, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + user,
+        },
+        body: JSON.stringify({
+          Text: text,
+        }),
+      });
+      alert(getValueFor("token"));
+    } catch (error) {}
+  };
   return (
     <View style={gStyle.container}>
       <SafeAreaView>
@@ -48,7 +76,9 @@ export const ChatComponent = () => {
           <TextInput
             style={gStyle.inputMessage}
             placeholder="Введите сообщение"
+            onChangeText={(value) => setText(value)}
           />
+          <Button title="Отправить" onPress={() => postChat()} />
         </KeyboardAwareScrollView>
       </SafeAreaView>
     </View>
