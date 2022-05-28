@@ -14,6 +14,10 @@ export default function UserScreen() {
     <View style={gStyle.container}>
       <SafeAreaView>
         <Button onPress={() => exit()} title="Выход" />
+        <Button
+          onPress={() => navigation.navigate("ChatComponent")}
+          title="Чат"
+        />
       </SafeAreaView>
     </View>
   );

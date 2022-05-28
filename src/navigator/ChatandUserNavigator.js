@@ -4,8 +4,9 @@ import { View } from "react-native";
 import UserScreen from "../screen/UserScreen";
 import AuthorizationScreen from "../screen/AuthorizationScreen";
 import { gStyle } from "../style/gStyle";
+import { ChatComponent } from "../components/ChatComponent";
 
-export const Exit = () => {
+export const ChatandUserNavigator = () => {
   const Stack = createStackNavigator();
   const screenOptionStyle = {
     headerMode: "none",
@@ -15,7 +16,7 @@ export const Exit = () => {
     <View style={gStyle.container}>
       <Stack.Navigator screenOptions={screenOptionStyle}>
         <Stack.Screen name="UserScreen" component={UserScreen} />
-        <Stack.Screen name="Exit" component={AuthorizationScreen} />
+        <Stack.Screen name="ChatComponent" component={ChatComponent} />
       </Stack.Navigator>
     </View>
   );

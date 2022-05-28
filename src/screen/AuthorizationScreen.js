@@ -7,6 +7,7 @@ import {
   ToastAndroid,
   Alert,
   Text,
+  KeyboardAvoidingView,
 } from "react-native";
 import { gStyle } from "../style/gStyle";
 import apiConfig from "../api/apiConfig";
@@ -65,40 +66,45 @@ export default function AuthorizationScreen() {
 
   return (
     <View style={gStyle.container}>
-      <View style={gStyle.containerAuth}>
-        <Image
-          source={{
-            uri: "https://cdn1.iconfinder.com/data/icons/cartoon-snack/128/popcorn-256.png",
-          }}
-          style={gStyle.imageRegistration}
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={gStyle.container}
+      >
+        <View style={gStyle.containerAuth}>
+          <Image
+            source={{
+              uri: "https://cdn1.iconfinder.com/data/icons/cartoon-snack/128/popcorn-256.png",
+            }}
+            style={gStyle.imageRegistration}
+          />
+        </View>
+        <View style={gStyle.textInputContainer}>
+          <TextInput
+            keyboardType="email-address"
+            style={gStyle.inputDataAutho}
+            placeholder="User Name"
+            placeholderTextColor="#A8A8A8"
+            onChangeText={(value) => setName(value)}
+          />
+          <TextInput
+            secureTextEntry={true}
+            style={gStyle.inputDataAutho}
+            placeholder="Password"
+            placeholderTextColor="#A8A8A8"
+            onChangeText={(value) => setPassword(value)}
+          />
+        </View>
+        <Button
+          title="Авторизоваться"
+          style={gStyle.buttonReg}
+          onPress={() => getToken()}
         />
-      </View>
-      <View style={gStyle.textInputContainer}>
-        <TextInput
-          keyboardType="email-address"
-          style={gStyle.inputDataAutho}
-          placeholder="User Name"
-          placeholderTextColor="#A8A8A8"
-          onChangeText={(value) => setName(value)}
+        <Button
+          title="Регистрация"
+          onPress={() => navigation.navigate("RegistrationScreen")}
         />
-        <TextInput
-          secureTextEntry={true}
-          style={gStyle.inputDataAutho}
-          placeholder="Password"
-          placeholderTextColor="#A8A8A8"
-          onChangeText={(value) => setPassword(value)}
-        />
-      </View>
-      <Button
-        title="Авторизоваться"
-        style={gStyle.buttonReg}
-        onPress={() => getToken()}
-      />
-      <Button
-        title="Регистрация"
-        onPress={() => navigation.navigate("RegistrationScreen")}
-      />
-      <Text>{isAuth}</Text>
+        <Text>{isAuth}</Text>
+      </KeyboardAvoidingView>
     </View>
   );
 }
