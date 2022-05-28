@@ -14,7 +14,9 @@ export default function MovieScreen({ route }) {
           <View style={gStyle.headerMovieScreen}>
             <View style={gStyle.textHeaderMovieScreen}>
               <Text style={gStyle.titleMoviesScreen}>{route.params.Name}</Text>
-
+              <Text style={gStyle.companyMoviesScreen}>
+                {route.params.Company}
+              </Text>
               <View style={gStyle.voteStar}>
                 <Image
                   style={gStyle.starVote}
@@ -27,6 +29,11 @@ export default function MovieScreen({ route }) {
                   {route.params.RaitingIMDb} /10
                 </Text>
                 <Text style={gStyle.raiting}> от IMDb</Text>
+              </View>
+              <View>
+                <Text style={gStyle.listActor}>
+                  В ролях: {route.params.ListActor}
+                </Text>
               </View>
               <Image
                 source={{ uri: route.params.Poster }}

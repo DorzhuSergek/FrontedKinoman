@@ -139,6 +139,14 @@ export const gStyle = StyleSheet.create({
     marginLeft: 15,
     fontSize: 21,
   },
+  companyMoviesScreen: {
+    position: "absolute",
+    zIndex: 1,
+    marginTop: 267,
+    color: "#777777",
+    marginLeft: 15,
+    fontSize: 15,
+  },
   release_date: {
     position: "absolute",
     marginTop: 220,
@@ -157,11 +165,11 @@ export const gStyle = StyleSheet.create({
     flexDirection: "row",
     position: "absolute",
     zIndex: 1,
-    marginTop: 300,
+    marginTop: 295,
     marginLeft: 15,
   },
   raiting: {
-    color: "#DEDDDF",
+    color: "#777777",
   },
   textHeaderMovieScreen: {
     width: 270,
@@ -271,5 +279,11 @@ export const gStyle = StyleSheet.create({
   containerForComments: {
     margin: 25,
     backgroundColor: "#242135",
+  },
+  listActor: {
+    position: "absolute",
+    marginTop: 315,
+    color: "#777777",
+    marginLeft: 15,
   },
 });
