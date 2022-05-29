@@ -10,7 +10,7 @@ import * as SecureStore from "expo-secure-store";
 
 export const ChatComponent = () => {
   const [message, setMessage] = useState([]);
-  const [text, setText] = useState();
+  let [text, setText] = useState();
   let [user, setUser] = useState();
   const baseUrl = apiConfig.baseUrl + apiConfig.chat;
   async function getValueFor(key) {
@@ -18,18 +18,17 @@ export const ChatComponent = () => {
       setUser(user)
     );
     user = result;
-    console.log(user);
   }
+  const getChat = async () => {
+    try {
+      const response = await myApi.getChat();
+      setMessage(response);
+    } catch (e) {
+      alert(e);
+    }
+    getValueFor("token");
+  };
   useEffect(() => {
-    const getChat = async () => {
-      try {
-        const response = await myApi.getChat();
-        setMessage(response);
-      } catch (e) {
-        alert(e);
-      }
-      getValueFor("token");
-    };
     getChat();
   }, []);
   const postChat = async () => {
@@ -45,8 +44,12 @@ export const ChatComponent = () => {
           Text: text,
         }),
       });
-      alert(getValueFor("token"));
-    } catch (error) {}
+      console.log(user);
+      setText("");
+      getChat();
+    } catch (error) {
+      alert(error);
+    }
   };
   return (
     <View style={gStyle.container}>
@@ -73,12 +76,15 @@ export const ChatComponent = () => {
               </View>
             )}
           />
-          <TextInput
-            style={gStyle.inputMessage}
-            placeholder="Введите сообщение"
-            onChangeText={(value) => setText(value)}
-          />
-          <Button title="Отправить" onPress={() => postChat()} />
+          <View style={gStyle.containerinputAndButton}>
+            <TextInput
+              style={gStyle.inputMessage}
+              placeholder="Введите сообщение"
+              placeholderTextColor={"#fff"}
+              onChangeText={(value) => setText(value)}
+            />
+            <Button title="Отправить" onPress={() => postChat()} />
+          </View>
         </KeyboardAwareScrollView>
       </SafeAreaView>
     </View>

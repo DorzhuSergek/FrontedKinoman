@@ -4,11 +4,13 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { gStyle } from "../style/gStyle";
 import { useNavigation } from "@react-navigation/native";
 import * as SecureStore from "expo-secure-store";
+import { Restart } from "fiction-expo-restart";
 
 export default function UserScreen() {
   const navigation = useNavigation();
   const exit = async () => {
     SecureStore.deleteItemAsync("token");
+    Restart();
   };
   return (
     <View style={gStyle.container}>

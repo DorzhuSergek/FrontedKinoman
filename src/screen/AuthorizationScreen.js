@@ -7,12 +7,12 @@ import {
   ToastAndroid,
   Alert,
   Text,
-  KeyboardAvoidingView,
 } from "react-native";
 import { gStyle } from "../style/gStyle";
 import apiConfig from "../api/apiConfig";
 import { useNavigation } from "@react-navigation/native";
 import * as SecureStore from "expo-secure-store";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 export default function AuthorizationScreen() {
   const navigation = useNavigation();
@@ -66,7 +66,7 @@ export default function AuthorizationScreen() {
 
   return (
     <View style={gStyle.container}>
-      <KeyboardAvoidingView
+      <KeyboardAwareScrollView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={gStyle.container}
       >
@@ -104,7 +104,7 @@ export default function AuthorizationScreen() {
           onPress={() => navigation.navigate("RegistrationScreen")}
         />
         <Text>{isAuth}</Text>
-      </KeyboardAvoidingView>
+      </KeyboardAwareScrollView>
     </View>
   );
 }

@@ -317,5 +317,6 @@ export const gStyle = StyleSheet.create({
     borderWidth: 1,
     margin: 15,
     padding: 15,
+    color: "#FFFFFF",
   },
 });
