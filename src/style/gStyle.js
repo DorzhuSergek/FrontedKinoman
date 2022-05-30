@@ -320,8 +320,31 @@ export const gStyle = StyleSheet.create({
     color: "#FFFFFF",
   },
   avatarUser: {
-    width: "100%",
-    height: 212,
+    width: 150,
+    height: 150,
     resizeMode: "contain",
+  },
+  containerforUser: {
+    flexDirection: "row",
+    marginTop: 25,
+  },
+  nameEmail: {
+    marginTop: 25,
+    marginLeft: 25,
+  },
+  nameUser: {
+    color: "#fff",
+    fontSize: 24,
+  },
+  emailUser: {
+    color: "#a8a8a8",
+    fontSize: 14,
+  },
+  buttonChangeImage: {
+    color: "#EF3A01",
+    marginBottom: 25,
+  },
+  containerbtn: {
+    margin: 15,
   },
 });

@@ -36,14 +36,17 @@ export default function AuthorizationScreen() {
   });
 
   const getToken = async () => {
+    //метод для отправки данных
     try {
       await fetch(baseUrlAuth, {
         method: "POST",
         headers: {
+          //заголовок запроса
           Accept: "application/json",
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
+          //тело запроса
           email: name,
           password: password,
         }),
@@ -51,15 +54,16 @@ export default function AuthorizationScreen() {
         .then((response) => response.json())
         .then((data) => {
           token = data.access_token;
-          save("token", token);
+          save("token", token); //сохраняем токен
           if (token != null) {
-            navigation.navigate("TabBarNavigato");
+            navigation.navigate("TabBarNavigato"); //переходим на главный экран
           } else {
-            Alert.alert("Ошибка", "Неверные данные");
+            //если данные введены не верно
+            Alert.alert("Ошибка", "Неверные данные"); //выводим сообщение
           }
         });
     } catch (error) {
-      ToastAndroid.show("Повторите попытку", ToastAndroid.SHORT);
+      ToastAndroid.show("Повторите попытку", ToastAndroid.SHORT); //При ошибке выводит сообщение
       console.error(error);
     }
   };
@@ -98,10 +102,12 @@ export default function AuthorizationScreen() {
           title="Авторизоваться"
           style={gStyle.buttonReg}
           onPress={() => getToken()}
+          color="#38354B"
         />
         <Button
           title="Регистрация"
           onPress={() => navigation.navigate("RegistrationScreen")}
+          color="#38354B"
         />
         <Text>{isAuth}</Text>
       </KeyboardAwareScrollView>
