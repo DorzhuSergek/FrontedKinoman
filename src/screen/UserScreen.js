@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Text, View, Button, Image } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { gStyle } from "../style/gStyle";
@@ -8,38 +8,57 @@ import * as ImagePicker from "expo-image-picker";
 
 export default function UserScreen() {
   const navigation = useNavigation();
-  const [selectedImage, setSelectedImage] = React.useState(null);
-  let pickerResult;
+  const [image, setImage] = React.useState(null);
+  let urlImage;
+
   const exit = async () => {
     SecureStore.deleteItemAsync("token");
   };
-  let openImagePickerAsync = async () => {
-    let permissionResult =
-      await ImagePicker.requestMediaLibraryPermissionsAsync();
-
-    if (permissionResult.granted === false) {
-      alert("Permission to access camera roll is required!");
-      return;
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [1, 1],
+      quality: 1,
+    });
+    if (!result.cancelled) {
+      let newfile = {
+        uri: result.uri,
+        type: `test/${result.uri.split(".")[1]}`,
+        name: `test.${result.uri.split(".")[1]}`,
+      };
+      handleUpload(newfile);
     }
 
-    let pickerResult = await ImagePicker.launchImageLibraryAsync();
+    console.log(result);
 
-    if (pickerResult.cancelled === true) {
-      return;
+    if (!result.cancelled) {
+      setImage(result.uri);
     }
-
-    setSelectedImage({ localUri: pickerResult.uri });
   };
-
+  const handleUpload = (image) => {
+    const data = new FormData();
+    data.append("file", image);
+    data.append("upload_preset", "Diplom");
+    data.append("cloud_name", "deb3voazt");
+    fetch("https://api.cloudinary.com/v1_1/deb3voazt/image/upload", {
+      method: "POST",
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+      body: data,
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data.secure_url);
+        urlImage = data.secure_url;
+      });
+  };
   return (
     <View style={gStyle.container}>
       <SafeAreaView>
-        {selectedImage !== null}
-        <Image
-          source={{ uri: selectedImage.localUri }}
-          style={gStyle.avatarUser}
-        />
-        <Button title="Аватар" onPress={openImagePickerAsync} />
+        {image && <Image source={{ uri: image }} style={gStyle.avatarUser} />}
+        <Button title="Аватар" onPress={pickImage} />
 
         <Button onPress={() => exit()} title="Выход" />
         <Button
