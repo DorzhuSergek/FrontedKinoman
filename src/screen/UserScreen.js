@@ -1,16 +1,27 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Text, View, Button, Image } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { gStyle } from "../style/gStyle";
 import { useNavigation } from "@react-navigation/native";
 import * as SecureStore from "expo-secure-store";
 import * as ImagePicker from "expo-image-picker";
+import apiConfig from "../api/apiConfig";
 
 export default function UserScreen() {
   const navigation = useNavigation();
-  const [image, setImage] = React.useState(null);
-  let urlImage;
-
+  const [image, setImage] = useState(null);
+  let [user, setUser] = useState();
+  const [userItem, setUserItem] = useState([]);
+  async function getValueFor(key) {
+    let result = await SecureStore.getItemAsync(key).then((user) =>
+      setUser(user)
+    );
+    user = result;
+  }
+  useEffect(() => {
+    getUserMe();
+    console.log(user);
+  }, []);
   const exit = async () => {
     SecureStore.deleteItemAsync("token");
   };
@@ -54,10 +65,33 @@ export default function UserScreen() {
         urlImage = data.secure_url;
       });
   };
+  const getUserMe = async () => {
+    getValueFor("token");
+
+    try {
+      await fetch(apiConfig.baseUrl + apiConfig.userMe, {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          Authorization: "Bearer " + user,
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          setUserItem(data);
+        });
+    } catch (e) {
+      alert(e);
+    }
+  };
+
   return (
     <View style={gStyle.container}>
       <SafeAreaView>
-        {image && <Image source={{ uri: image }} style={gStyle.avatarUser} />}
+        {image && (
+          <Image source={{ uri: userItem.avatar }} style={gStyle.avatarUser} />
+        )}
         <Button title="Аватар" onPress={pickImage} />
 
         <Button onPress={() => exit()} title="Выход" />
@@ -65,6 +99,9 @@ export default function UserScreen() {
           onPress={() => navigation.navigate("ChatComponent")}
           title="Чат"
         />
+        <Text>{userItem.Email}</Text>
+        <Text>{apiConfig.baseUrl + apiConfig.userMe}</Text>
+        <Image source={{ uri: userItem.avatar }} style={gStyle.avatarUser} />
       </SafeAreaView>
     </View>
   );
