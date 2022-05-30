@@ -7,5 +7,6 @@ const apiConfig = {
   createComment: "/comments/",
   chat: "/chat/",
   userMe: "/users/me",
+  updateImage: "/update/user",
 };
 export default apiConfig;

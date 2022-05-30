@@ -12,6 +12,7 @@ export default function UserScreen() {
   const [image, setImage] = useState(null);
   let [user, setUser] = useState();
   const [userItem, setUserItem] = useState([]);
+  let urlImage;
   async function getValueFor(key) {
     let result = await SecureStore.getItemAsync(key).then((user) =>
       setUser(user)
@@ -20,7 +21,7 @@ export default function UserScreen() {
   }
   useEffect(() => {
     getUserMe();
-    console.log(user);
+    getValueFor("token");
   }, []);
   const exit = async () => {
     SecureStore.deleteItemAsync("token");
@@ -61,13 +62,33 @@ export default function UserScreen() {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data.secure_url);
         urlImage = data.secure_url;
+        console.log(urlImage);
       });
+    updateImage();
+  };
+
+  const updateImage = async () => {
+    // try {
+    //   await fetch(apiConfig.baseUrl + apiConfig.updateImage, {
+    //     method: "PUT",
+    //     headers: {
+    //       accept: "application/json",
+    //       Authorization: "Bearer " + user,
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: urlImage,
+    //   })
+    //     .then((res) => res.json())
+    //     .then((data) => {
+    //       console.log(data);
+    //     });
+    // } catch (e) {
+    //   alert(e);
+    // }
   };
   const getUserMe = async () => {
     getValueFor("token");
-
     try {
       await fetch(apiConfig.baseUrl + apiConfig.userMe, {
         method: "GET",
@@ -81,6 +102,7 @@ export default function UserScreen() {
           console.log(data);
           setUserItem(data);
         });
+      console.log(user);
     } catch (e) {
       alert(e);
     }
@@ -89,19 +111,31 @@ export default function UserScreen() {
   return (
     <View style={gStyle.container}>
       <SafeAreaView>
-        {image && (
-          <Image source={{ uri: userItem.avatar }} style={gStyle.avatarUser} />
-        )}
-        <Button title="Аватар" onPress={pickImage} />
-
-        <Button onPress={() => exit()} title="Выход" />
-        <Button
-          onPress={() => navigation.navigate("ChatComponent")}
-          title="Чат"
-        />
-        <Text>{userItem.Email}</Text>
-        <Text>{apiConfig.baseUrl + apiConfig.userMe}</Text>
-        <Image source={{ uri: userItem.avatar }} style={gStyle.avatarUser} />
+        <View>
+          <View style={gStyle.containerforUser}>
+            <Image
+              source={{ uri: userItem.avatar }}
+              style={gStyle.avatarUser}
+            />
+            <View style={gStyle.nameEmail}>
+              <Text style={gStyle.nameUser}>{userItem.Full_Name}</Text>
+              <Text style={gStyle.emailUser}>{userItem.Email}</Text>
+            </View>
+          </View>
+          <Text onPress={pickImage} style={gStyle.buttonChangeImage}>
+            Изменить аватар
+          </Text>
+        </View>
+        <View style={gStyle.containerbtn}>
+          <Button
+            onPress={() => navigation.navigate("ChatComponent")}
+            title="Чат"
+            color="#38354B"
+          />
+        </View>
+        <View style={gStyle.containerbtn}>
+          <Button onPress={() => exit()} title="Выход" color="#38354B" />
+        </View>
       </SafeAreaView>
     </View>
   );
