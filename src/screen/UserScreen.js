@@ -63,12 +63,11 @@ export default function UserScreen() {
       .then((res) => res.json())
       .then((data) => {
         urlImage = data.secure_url;
-        console.log(urlImage);
       });
-    updateImage();
+    updateImage(urlImage);
   };
 
-  const updateImage = async () => {
+  const updateImage = async (image) => {
     try {
       await fetch(apiConfig.baseUrl + apiConfig.updateImage, {
         method: "PUT",
@@ -77,7 +76,9 @@ export default function UserScreen() {
           Authorization: "Bearer " + user,
           "Content-Type": "application/json",
         },
-        body: urlImage,
+        body: JSON.stringify({
+          avatar: image,
+        }),
       })
         .then((res) => res.json())
         .then((data) => {
