@@ -63,8 +63,9 @@ export default function UserScreen() {
       .then((res) => res.json())
       .then((data) => {
         urlImage = data.secure_url;
+        updateImage(urlImage);
+        getUserMe();
       });
-    updateImage(urlImage);
   };
 
   const updateImage = async (image) => {
