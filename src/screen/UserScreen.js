@@ -22,7 +22,7 @@ export default function UserScreen() {
   useEffect(() => {
     getUserMe();
     getValueFor("token");
-  }, []);
+  }, [user]);
   const exit = async () => {
     SecureStore.deleteItemAsync("token");
   };
@@ -69,23 +69,23 @@ export default function UserScreen() {
   };
 
   const updateImage = async () => {
-    // try {
-    //   await fetch(apiConfig.baseUrl + apiConfig.updateImage, {
-    //     method: "PUT",
-    //     headers: {
-    //       accept: "application/json",
-    //       Authorization: "Bearer " + user,
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: urlImage,
-    //   })
-    //     .then((res) => res.json())
-    //     .then((data) => {
-    //       console.log(data);
-    //     });
-    // } catch (e) {
-    //   alert(e);
-    // }
+    try {
+      await fetch(apiConfig.baseUrl + apiConfig.updateImage, {
+        method: "PUT",
+        headers: {
+          accept: "application/json",
+          Authorization: "Bearer " + user,
+          "Content-Type": "application/json",
+        },
+        body: urlImage,
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+        });
+    } catch (e) {
+      alert(e);
+    }
   };
   const getUserMe = async () => {
     getValueFor("token");
@@ -104,7 +104,7 @@ export default function UserScreen() {
         });
       console.log(user);
     } catch (e) {
-      alert(e);
+      console.log(e);
     }
   };
 

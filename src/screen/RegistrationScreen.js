@@ -16,27 +16,37 @@ export default function RegistrationScreen() {
 
   const registration = async () => {
     try {
-      await fetch(baseUrlAuth, {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          Full_Name: name,
-          Email: email,
-          password: password,
-          password2: password2,
-        }),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log(data);
-          Alert.alert("Успешно", "Введите данные");
-          navigation.navigate("AuthorizationScreen");
-        });
+      if (name === "" && email === "" && password === "" && password2 === "") {
+        //валидация на заполненность полей
+        Alert.alert("Ошибка", "Заполните поля");
+      } else {
+        await fetch(baseUrlAuth, {
+          //логика регистрации пользователя
+          method: "POST",
+          headers: {
+            //заголовок запроса
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            //тело запроса
+            Full_Name: name,
+            Email: email,
+            password: password,
+            password2: password2,
+          }),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            //если все успешно
+            console.log(data);
+            Alert.alert("Успешно", "Введите данные заново"); //выводим сообщение
+            navigation.navigate("AuthorizationScreen"); //и переходим на экран авторизации
+          });
+      }
     } catch (error) {
-      console.error(error);
+      //в случаи ошибки
+      alert(e); //выводим проблему на экран
     }
   };
   return (
