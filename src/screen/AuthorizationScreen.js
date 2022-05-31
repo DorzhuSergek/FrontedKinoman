@@ -86,30 +86,33 @@ export default function AuthorizationScreen() {
           <TextInput
             keyboardType="email-address"
             style={gStyle.inputDataAutho}
-            placeholder="User Name"
+            placeholder="Почта"
             placeholderTextColor="#A8A8A8"
             onChangeText={(value) => setName(value)}
           />
           <TextInput
             secureTextEntry={true}
             style={gStyle.inputDataAutho}
-            placeholder="Password"
+            placeholder="Пароль"
             placeholderTextColor="#A8A8A8"
             onChangeText={(value) => setPassword(value)}
           />
         </View>
-        <Button
-          title="Авторизоваться"
-          style={gStyle.buttonReg}
-          onPress={() => getToken()}
-          color="#38354B"
-        />
-        <Button
-          title="Регистрация"
-          onPress={() => navigation.navigate("RegistrationScreen")}
-          color="#38354B"
-        />
-        <Text>{isAuth}</Text>
+        <View style={gStyle.containerbtn}>
+          <Button
+            title="Авторизоваться"
+            style={gStyle.buttonReg}
+            onPress={() => getToken()}
+            color="#38354B"
+          />
+        </View>
+        <View style={gStyle.containerbtn}>
+          <Button
+            title="Регистрация"
+            onPress={() => navigation.navigate("RegistrationScreen")}
+            color="#38354B"
+          />
+        </View>
       </KeyboardAwareScrollView>
     </View>
   );

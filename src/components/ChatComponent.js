@@ -12,6 +12,7 @@ export const ChatComponent = () => {
   const [message, setMessage] = useState([]);
   let [text, setText] = useState();
   let [user, setUser] = useState();
+
   const baseUrl = apiConfig.baseUrl + apiConfig.chat;
   async function getValueFor(key) {
     let result = await SecureStore.getItemAsync(key).then((user) =>
@@ -30,7 +31,7 @@ export const ChatComponent = () => {
   };
   useEffect(() => {
     getChat();
-  }, []);
+  }, [message]);
   const postChat = async () => {
     try {
       await fetch(baseUrl, {
@@ -44,7 +45,6 @@ export const ChatComponent = () => {
           Text: text,
         }),
       });
-      console.log(user);
       setText("");
       getChat();
     } catch (error) {
@@ -63,7 +63,7 @@ export const ChatComponent = () => {
                 <View style={gStyle.containerChatMessage}>
                   <Image
                     source={{
-                      uri: "https://cdn0.iconfinder.com/data/icons/eon-social-media-contact-info-2/32/user_people_person_users_man-512.png",
+                      uri: item.user.avatar,
                     }}
                     style={gStyle.avatarComments}
                   />
@@ -71,7 +71,7 @@ export const ChatComponent = () => {
                 </View>
                 <View style={gStyle.containerUserData}>
                   <Text style={gStyle.chatUser}>{item.user.Full_Name} </Text>
-                  <Text style={gStyle.chatUser}>18:21</Text>
+                  <Text style={gStyle.time}>{item.time} </Text>
                 </View>
               </View>
             )}
@@ -82,8 +82,15 @@ export const ChatComponent = () => {
               placeholder="Введите сообщение"
               placeholderTextColor={"#fff"}
               onChangeText={(value) => setText(value)}
+              value={text}
             />
-            <Button title="Отправить" onPress={() => postChat()} />
+            <View style={gStyle.containerbtn}>
+              <Button
+                title="Отправить"
+                onPress={() => postChat()}
+                color="#38354B"
+              />
+            </View>
           </View>
         </KeyboardAwareScrollView>
       </SafeAreaView>

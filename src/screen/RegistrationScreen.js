@@ -39,7 +39,6 @@ export default function RegistrationScreen() {
           .then((response) => response.json())
           .then((data) => {
             //если все успешно
-            console.log(data);
             Alert.alert("Успешно", "Введите данные заново"); //выводим сообщение
             navigation.navigate("AuthorizationScreen"); //и переходим на экран авторизации
           });
@@ -87,11 +86,14 @@ export default function RegistrationScreen() {
             style={gStyle.inputDataAutho}
             onChangeText={(value) => setPassword2(value)}
           />
-          <Button
-            title="Авторизоваться"
-            style={gStyle.buttonReg}
-            onPress={registration}
-          />
+          <View style={gStyle.containerbtn}>
+            <Button
+              title="Авторизоваться"
+              style={gStyle.buttonReg}
+              onPress={registration}
+              color="#38354B"
+            />
+          </View>
         </KeyboardAwareScrollView>
       </SafeAreaView>
     </View>

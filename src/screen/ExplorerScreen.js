@@ -26,7 +26,6 @@ export default function ExplorerScreen() {
         setFilteredData(response);
       } catch {}
     };
-
     getMovies();
   }, []);
   const searchFilter = (text) => {

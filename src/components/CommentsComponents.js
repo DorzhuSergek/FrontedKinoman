@@ -35,7 +35,7 @@ const CommentsComponents = (props) => {
       getValueFor("token");
     };
     getList();
-  }, []);
+  }, [items]);
   const createComment = async () => {
     try {
       await fetch(
@@ -51,7 +51,8 @@ const CommentsComponents = (props) => {
           body: JSON.stringify({
             text: text,
           }),
-        }
+        },
+        setText("")
       );
     } catch (e) {
       alert(e);
@@ -67,7 +68,7 @@ const CommentsComponents = (props) => {
             <View style={gStyle.commentsHeader}>
               <Image
                 source={{
-                  uri: "https://cdn0.iconfinder.com/data/icons/eon-social-media-contact-info-2/32/user_people_person_users_man-512.png",
+                  uri: item.user.avatar,
                 }}
                 style={gStyle.avatarComments}
               />
@@ -81,8 +82,12 @@ const CommentsComponents = (props) => {
         style={gStyle.inputDataAutho}
         placeholder="Отправить комментарий"
         onChangeText={(value) => setText(value)}
+        placeholderTextColor="#a7a7a7"
+        value={text}
       />
-      <Button title="Отправить" onPress={() => createComment()} />
+      <View style={gStyle.containerbtn}>
+        <Button title="Отправить" onPress={() => createComment()} />
+      </View>
     </View>
   );
 };

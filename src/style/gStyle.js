@@ -216,11 +216,13 @@ export const gStyle = StyleSheet.create({
     resizeMode: "contain",
   },
   avatarComments: {
-    width: 50,
-    height: 50,
+    width: 70,
+    height: 70,
+    margin: 5,
+    resizeMode: "contain",
   },
   commentsText: {
-    color: "#A4A3A9",
+    color: "#fff",
   },
   nameComments: {
     color: "#DEDDDF",
@@ -250,6 +252,9 @@ export const gStyle = StyleSheet.create({
     paddingBottom: 15,
   },
   searchInput: {
+    borderColor: "#fff",
+    borderWidth: 1,
+    margin: 15,
     height: 50,
     padding: 10,
     color: "#FFFFFF",
@@ -294,12 +299,14 @@ export const gStyle = StyleSheet.create({
     width: "70%",
     color: "white",
     textAlignVertical: "center",
+    marginLeft: 15,
   },
   containerChatMessage: {
     flexDirection: "row",
   },
   chatUser: {
     color: "#969594",
+    marginLeft: 75,
   },
   containerUserData: {
     width: "70%",
@@ -346,5 +353,9 @@ export const gStyle = StyleSheet.create({
   },
   containerbtn: {
     margin: 15,
+  },
+  time: {
+    color: "#969594",
+    marginLeft: 45,
   },
 });

@@ -6,6 +6,7 @@ import { useNavigation } from "@react-navigation/native";
 import * as SecureStore from "expo-secure-store";
 import * as ImagePicker from "expo-image-picker";
 import apiConfig from "../api/apiConfig";
+import * as Updates from "expo-updates";
 
 export default function UserScreen() {
   const navigation = useNavigation();
@@ -25,6 +26,7 @@ export default function UserScreen() {
   }, [user]);
   const exit = async () => {
     SecureStore.deleteItemAsync("token");
+    await Updates.reloadAsync();
   };
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -41,8 +43,6 @@ export default function UserScreen() {
       };
       handleUpload(newfile);
     }
-
-    console.log(result);
 
     if (!result.cancelled) {
       setImage(result.uri);
