@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import myApi from "../api/myApi";
 import { SafeAreaView } from "react-native-safe-area-context";
+import SearchBar from "react-native-platform-searchbar";
 
 export default function ExplorerScreen() {
   const navigation = useNavigation();
@@ -45,41 +46,39 @@ export default function ExplorerScreen() {
   return (
     <View style={gStyle.container}>
       <SafeAreaView>
-        <View>
-          <TextInput
-            placeholder="Поиск"
-            style={gStyle.searchInput}
-            value={search}
-            placeholderTextColor="#E5E5E5"
-            onChangeText={(text) => searchFilter(text)}
-          ></TextInput>
-          <FlatList
-            data={filteredData}
-            renderItem={({ item }) => (
-              <View>
-                <TouchableOpacity
-                  onPress={() => navigation.navigate("MovieScreen", item)}
-                  style={gStyle.blockMovies}
-                >
-                  <Image
-                    source={{ uri: item.Poster }}
-                    style={gStyle.posterImage}
-                  />
-                  <View>
-                    <Text style={gStyle.ExplorerTitleMovies}>{item.Name}</Text>
-                    <Text style={gStyle.ExplorerTitleMovies}>{item.Genre}</Text>
-                    <Text style={gStyle.ExplorerTitleMovies}>
-                      {item.RaitingIMDb}
-                    </Text>
-                    <Text style={gStyle.ExplorerTitleMovies}>
-                      {item.Vote_from_user}
-                    </Text>
-                  </View>
-                </TouchableOpacity>
-              </View>
-            )}
-          />
-        </View>
+        <SearchBar
+          value={search}
+          onChangeText={(text) => searchFilter(text)}
+          placeholder="Поиск"
+          theme="dark"
+          platform="android"
+          style={gStyle.search}
+        />
+        <FlatList
+          data={filteredData}
+          renderItem={({ item }) => (
+            <View>
+              <TouchableOpacity
+                onPress={() => navigation.navigate("MovieScreen", item)}
+                style={gStyle.blockMovies}
+              >
+                <Image
+                  source={{ uri: item.Poster }}
+                  style={gStyle.posterImage}
+                />
+                <View>
+                  <Text style={gStyle.ExplorerTitleMovies}>{item.Name}</Text>
+                  <Text style={gStyle.listActorExplorer}>
+                    В ролях:
+                    <Text> {item.ListActor}</Text>
+                  </Text>
+                  <Text style={gStyle.company}>{item.Company}</Text>
+                  <Text style={gStyle.year}>{item.year}</Text>
+                </View>
+              </TouchableOpacity>
+            </View>
+          )}
+        />
       </SafeAreaView>
     </View>
   );

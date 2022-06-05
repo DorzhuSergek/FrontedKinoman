@@ -66,6 +66,7 @@ export const gStyle = StyleSheet.create({
     height: 240,
     marginLeft: 15,
     zIndex: 1,
+    resizeMode: "cover",
   },
   textExtensions: {
     color: "#777777",
@@ -242,10 +243,10 @@ export const gStyle = StyleSheet.create({
   },
   ExplorerTitleMovies: {
     color: "white",
-    fontSize: 14,
-    textAlign: "center",
+    fontSize: 18,
     width: 240,
     paddingTop: 15,
+    marginLeft: 5,
   },
   blockMovies: {
     flexDirection: "row",
@@ -260,11 +261,12 @@ export const gStyle = StyleSheet.create({
     color: "#FFFFFF",
   },
   inputDataAutho: {
-    borderColor: "#fff",
+    borderColor: "#A8A8A8",
     borderWidth: 1,
     color: "#fff",
     margin: 15,
     padding: 15,
+    borderRadius: 5,
   },
   containerAuth: {
     paddingTop: 50,
@@ -280,6 +282,7 @@ export const gStyle = StyleSheet.create({
   },
   textInputContainer: {
     marginBottom: 50,
+    marginTop: 50,
   },
   containerForComments: {
     margin: 25,
@@ -357,5 +360,29 @@ export const gStyle = StyleSheet.create({
   time: {
     color: "#969594",
     marginLeft: 45,
+  },
+  search: {
+    margin: 15,
+  },
+  listActorExplorer: {
+    color: "white",
+    fontSize: 14,
+    width: 240,
+    paddingTop: 15,
+    marginLeft: 5,
+  },
+  company: {
+    color: "white",
+    fontSize: 12,
+    width: 240,
+    paddingTop: 15,
+    marginLeft: 5,
+  },
+  year: {
+    color: "white",
+    fontSize: 12,
+    width: 240,
+    paddingTop: 15,
+    marginLeft: 5,
   },
 });

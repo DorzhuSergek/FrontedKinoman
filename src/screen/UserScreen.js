@@ -1,5 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Text, View, Button, Image } from "react-native";
+import {
+  TextInput,
+  View,
+  Button,
+  Text,
+  Image,
+  ToastAndroid,
+  Alert,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { gStyle } from "../style/gStyle";
 import { useNavigation } from "@react-navigation/native";
@@ -7,12 +15,71 @@ import * as SecureStore from "expo-secure-store";
 import * as ImagePicker from "expo-image-picker";
 import apiConfig from "../api/apiConfig";
 import * as Updates from "expo-updates";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { reloadAsync } from "expo-updates";
 
 export default function UserScreen() {
   const navigation = useNavigation();
   const [image, setImage] = useState(null);
   let [user, setUser] = useState();
   const [userItem, setUserItem] = useState([]);
+  const [name, setName] = useState("");
+  const [password, setPassword] = useState("");
+  const baseUrlAuth = apiConfig.baseUrl + apiConfig.login;
+
+  async function save(key, value) {
+    await SecureStore.setItemAsync(key, value).then((user) => {
+      setUser(user);
+    });
+  }
+
+  async function getValueFor(key) {
+    let result = await SecureStore.getItemAsync(key).then((user) =>
+      setUser(user)
+    );
+    user = result;
+  }
+  useEffect(() => {
+    getValueFor("token");
+    getUserMe();
+  }, [user]);
+
+  const getToken = async () => {
+    //метод для отправки данных
+    if (name === "" || password === "") {
+      Alert.alert("Ошибка", "Заполните поля");
+    } else {
+      try {
+        await fetch(baseUrlAuth, {
+          method: "POST",
+          headers: {
+            //заголовок запроса
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            //тело запроса
+            email: name,
+            password: password,
+          }),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            user = data.access_token;
+            save("token", user); //сохраняем токен
+            if (user != null) {
+              console.log(user); //переходим на главный экран
+            } else {
+              //если данные введены не верно
+              Alert.alert("Ошибка", "Неверные данные"); //выводим сообщение
+            }
+          });
+      } catch (error) {
+        ToastAndroid.show("Повторите попытку", ToastAndroid.SHORT); //При ошибке выводит сообщение
+        console.error(error);
+      }
+    }
+  };
   let urlImage;
   async function getValueFor(key) {
     let result = await SecureStore.getItemAsync(key).then((user) =>
@@ -25,8 +92,9 @@ export default function UserScreen() {
     getValueFor("token");
   }, [user]);
   const exit = async () => {
-    SecureStore.deleteItemAsync("token");
-    await Updates.reloadAsync();
+    SecureStore.deleteItemAsync("token").then((user) => {
+      setUser(user);
+    });
   };
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -113,31 +181,69 @@ export default function UserScreen() {
   return (
     <View style={gStyle.container}>
       <SafeAreaView>
-        <View>
-          <View style={gStyle.containerforUser}>
-            <Image
-              source={{ uri: userItem.avatar }}
-              style={gStyle.avatarUser}
-            />
-            <View style={gStyle.nameEmail}>
-              <Text style={gStyle.nameUser}>{userItem.Full_Name}</Text>
-              <Text style={gStyle.emailUser}>{userItem.Email}</Text>
+        {user == null ? (
+          <>
+            <View style={gStyle.textInputContainer}>
+              <TextInput
+                keyboardType="email-address"
+                style={gStyle.inputDataAutho}
+                placeholder="Почта"
+                placeholderTextColor="#A8A8A8"
+                onChangeText={(value) => setName(value)}
+              />
+              <TextInput
+                secureTextEntry={true}
+                style={gStyle.inputDataAutho}
+                placeholder="Пароль"
+                placeholderTextColor="#A8A8A8"
+                onChangeText={(value) => setPassword(value)}
+              />
+            </View>
+            <View style={gStyle.containerbtn}>
+              <Button
+                title="Авторизоваться"
+                style={gStyle.buttonReg}
+                onPress={() => getToken()}
+                color="#38354B"
+              />
+            </View>
+            <View style={gStyle.containerbtn}>
+              <Button
+                title="Регистрация"
+                onPress={() => navigation.navigate("RegistrationScreen")}
+                color="#38354B"
+              />
+            </View>
+          </>
+        ) : (
+          <View>
+            <View>
+              <View style={gStyle.containerforUser}>
+                <Image
+                  source={{ uri: userItem.avatar }}
+                  style={gStyle.avatarUser}
+                />
+                <View style={gStyle.nameEmail}>
+                  <Text style={gStyle.nameUser}>{userItem.Full_Name}</Text>
+                  <Text style={gStyle.emailUser}>{userItem.Email}</Text>
+                </View>
+              </View>
+              <Text onPress={pickImage} style={gStyle.buttonChangeImage}>
+                Изменить аватар
+              </Text>
+            </View>
+            <View style={gStyle.containerbtn}>
+              <Button
+                onPress={() => navigation.navigate("ChatComponent")}
+                title="Чат"
+                color="#38354B"
+              />
+            </View>
+            <View style={gStyle.containerbtn}>
+              <Button onPress={() => exit()} title="Выход" color="#38354B" />
             </View>
           </View>
-          <Text onPress={pickImage} style={gStyle.buttonChangeImage}>
-            Изменить аватар
-          </Text>
-        </View>
-        <View style={gStyle.containerbtn}>
-          <Button
-            onPress={() => navigation.navigate("ChatComponent")}
-            title="Чат"
-            color="#38354B"
-          />
-        </View>
-        <View style={gStyle.containerbtn}>
-          <Button onPress={() => exit()} title="Выход" color="#38354B" />
-        </View>
+        )}
       </SafeAreaView>
     </View>
   );

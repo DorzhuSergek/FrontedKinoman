@@ -4,15 +4,14 @@ import {
   Text,
   View,
   Image,
-  TouchableOpacity,
   TextInput,
   Button,
+  Alert,
 } from "react-native";
 import myApi from "../api/myApi";
 import { gStyle } from "../style/gStyle";
 import PropTypes from "prop-types";
 import * as SecureStore from "expo-secure-store";
-import apiConfig from "../api/apiConfig";
 
 const CommentsComponents = (props) => {
   const [items, setItems] = useState([]);
@@ -37,28 +36,32 @@ const CommentsComponents = (props) => {
     getList();
   }, [items]);
   const createComment = async () => {
-    if (text === "") {
-      alert("Пустое поле");
+    if (user === null) {
+      Alert.alert("Регистрация", "вам нужно зарегистрироваться");
     } else {
-      try {
-        await fetch(
-          "https://kinomanoat.herokuapp.com/comments/{MovieId}?movieId=" +
-            props.idMovies,
-          {
-            method: "POST",
-            headers: {
-              Accept: "application/json",
-              "Content-Type": "application/json",
-              Authorization: "Bearer " + user,
+      if (text === "") {
+        Alert.alert("Ошибка", "Пустое поле");
+      } else {
+        try {
+          await fetch(
+            "https://kinomanoat.herokuapp.com/comments/{MovieId}?movieId=" +
+              props.idMovies,
+            {
+              method: "POST",
+              headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + user,
+              },
+              body: JSON.stringify({
+                text: text,
+              }),
             },
-            body: JSON.stringify({
-              text: text,
-            }),
-          },
-          setText("")
-        );
-      } catch (e) {
-        alert(e);
+            setText("")
+          );
+        } catch (e) {
+          alert(e);
+        }
       }
     }
   };
@@ -90,7 +93,11 @@ const CommentsComponents = (props) => {
         value={text}
       />
       <View style={gStyle.containerbtn}>
-        <Button title="Отправить" onPress={() => createComment()} />
+        <Button
+          title="Отправить"
+          onPress={() => createComment()}
+          color="#38354B"
+        />
       </View>
     </View>
   );

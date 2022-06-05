@@ -4,6 +4,7 @@ import AuthorizationScreen from "../screen/AuthorizationScreen";
 import RegistrationScreen from "../screen/RegistrationScreen";
 
 import { TabBarNavigato } from "./TabBarNavigator";
+import UserScreen from "../screen/UserScreen";
 
 const Stack = createStackNavigator();
 const screenOptionStyle = {
@@ -14,8 +15,8 @@ export const StartScreenNavigator = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="AuthorizationScreen"
-        component={AuthorizationScreen}
+        name="UserScreen"
+        component={UserScreen}
         options={{
           headerShown: false,
         }}
@@ -23,13 +24,6 @@ export const StartScreenNavigator = () => {
       <Stack.Screen
         name="RegistrationScreen"
         component={RegistrationScreen}
-        options={{
-          headerShown: false,
-        }}
-      />
-      <Stack.Screen
-        name="TabBarNavigato"
-        component={TabBarNavigato}
         options={{
           headerShown: false,
         }}

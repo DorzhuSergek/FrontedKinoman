@@ -5,6 +5,7 @@ import UserScreen from "../screen/UserScreen";
 import AuthorizationScreen from "../screen/AuthorizationScreen";
 import { gStyle } from "../style/gStyle";
 import { ChatComponent } from "../components/ChatComponent";
+import RegistrationScreen from "../screen/RegistrationScreen";
 
 export const ChatandUserNavigator = () => {
   const Stack = createStackNavigator();
@@ -17,6 +18,10 @@ export const ChatandUserNavigator = () => {
       <Stack.Navigator screenOptions={screenOptionStyle}>
         <Stack.Screen name="UserScreen" component={UserScreen} />
         <Stack.Screen name="ChatComponent" component={ChatComponent} />
+        <Stack.Screen
+          name="RegistrationScreen"
+          component={RegistrationScreen}
+        />
       </Stack.Navigator>
     </View>
   );
