@@ -220,7 +220,7 @@ export const gStyle = StyleSheet.create({
     width: 70,
     height: 70,
     margin: 5,
-    resizeMode: "contain",
+    borderRadius: 100,
   },
   commentsText: {
     color: "#fff",
@@ -297,6 +297,7 @@ export const gStyle = StyleSheet.create({
   chatTitleHeader: {
     color: "white",
     textAlign: "center",
+    fontSize: 20,
   },
   chatMessageBox: {
     width: "70%",
@@ -309,25 +310,26 @@ export const gStyle = StyleSheet.create({
   },
   chatUser: {
     color: "#969594",
-    marginLeft: 75,
+    marginLeft: 85,
   },
   containerUserData: {
-    width: "70%",
     flexDirection: "row",
     textAlign: "center",
+    width: "70%",
   },
   containerChat: {
-    backgroundColor: "#2E2B2A",
+    backgroundColor: "#242135",
     margin: 5,
   },
   inputMessage: {
     position: "relative",
     bottom: 0,
-    borderColor: "#fff",
+    borderColor: "#a8a8a8",
     borderWidth: 1,
     margin: 15,
     padding: 15,
     color: "#FFFFFF",
+    borderRadius: 4,
   },
   avatarUser: {
     width: 150,
@@ -337,6 +339,7 @@ export const gStyle = StyleSheet.create({
   containerforUser: {
     flexDirection: "row",
     marginTop: 25,
+    marginLeft: 15,
   },
   nameEmail: {
     marginTop: 25,
@@ -353,13 +356,15 @@ export const gStyle = StyleSheet.create({
   buttonChangeImage: {
     color: "#EF3A01",
     marginBottom: 25,
+    marginLeft: 20,
   },
   containerbtn: {
     margin: 15,
   },
   time: {
     color: "#969594",
-    marginLeft: 45,
+    width: "70%",
+    marginLeft: 125,
   },
   search: {
     margin: 15,

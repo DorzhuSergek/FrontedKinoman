@@ -12,7 +12,6 @@ export const ChatComponent = () => {
   const [message, setMessage] = useState([]);
   let [text, setText] = useState();
   let [user, setUser] = useState();
-
   const baseUrl = apiConfig.baseUrl + apiConfig.chat;
   async function getValueFor(key) {
     let result = await SecureStore.getItemAsync(key).then((user) =>
@@ -75,7 +74,7 @@ export const ChatComponent = () => {
                 </View>
                 <View style={gStyle.containerUserData}>
                   <Text style={gStyle.chatUser}>{item.user.Full_Name} </Text>
-                  <Text style={gStyle.time}>{item.time} </Text>
+                  <Text style={gStyle.time}>{item.user.Email} </Text>
                 </View>
               </View>
             )}
@@ -84,7 +83,7 @@ export const ChatComponent = () => {
             <TextInput
               style={gStyle.inputMessage}
               placeholder="Введите сообщение"
-              placeholderTextColor={"#fff"}
+              placeholderTextColor={"#a8a8a8"}
               onChangeText={(value) => setText(value)}
               value={text}
             />
