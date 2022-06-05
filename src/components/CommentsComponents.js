@@ -38,6 +38,9 @@ const CommentsComponents = (props) => {
   }, [items]);
   const createComment = async () => {
     if (text === "") {
+      if (user === null || user === undefined) {
+        alert("вам нужно зарегистрироваться");
+      }
       alert("Пустое поле");
     } else {
       try {

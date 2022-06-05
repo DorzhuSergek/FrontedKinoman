@@ -24,23 +24,13 @@ export const MainNavigator = () => {
     <View style={gStyle.container}>
       <NavigationContainer>
         <Stack.Navigator>
-          {isAuth == null ? (
-            <Stack.Screen
-              name="StartScreenNavigator"
-              component={StartScreenNavigator}
-              options={{
-                headerShown: false,
-              }}
-            />
-          ) : (
-            <Stack.Screen
-              name="TabBarNavigato"
-              component={TabBarNavigato}
-              options={{
-                headerShown: false,
-              }}
-            />
-          )}
+          <Stack.Screen
+            name="TabBarNavigato"
+            component={TabBarNavigato}
+            options={{
+              headerShown: false,
+            }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </View>
