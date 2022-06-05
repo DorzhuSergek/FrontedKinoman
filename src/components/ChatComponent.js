@@ -33,22 +33,26 @@ export const ChatComponent = () => {
     getChat();
   }, [message]);
   const postChat = async () => {
-    try {
-      await fetch(baseUrl, {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + user,
-        },
-        body: JSON.stringify({
-          Text: text,
-        }),
-      });
-      setText("");
-      getChat();
-    } catch (error) {
-      alert(error);
+    if (text === "") {
+      alert("Пустое поле");
+    } else {
+      try {
+        await fetch(baseUrl, {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + user,
+          },
+          body: JSON.stringify({
+            Text: text,
+          }),
+        });
+        setText("");
+        getChat();
+      } catch (error) {
+        alert(error);
+      }
     }
   };
   return (

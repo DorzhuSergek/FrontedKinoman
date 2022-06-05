@@ -37,25 +37,29 @@ const CommentsComponents = (props) => {
     getList();
   }, [items]);
   const createComment = async () => {
-    try {
-      await fetch(
-        "https://kinomanoat.herokuapp.com/comments/{MovieId}?movieId=" +
-          props.idMovies,
-        {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + user,
+    if (text === "") {
+      alert("Пустое поле");
+    } else {
+      try {
+        await fetch(
+          "https://kinomanoat.herokuapp.com/comments/{MovieId}?movieId=" +
+            props.idMovies,
+          {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + user,
+            },
+            body: JSON.stringify({
+              text: text,
+            }),
           },
-          body: JSON.stringify({
-            text: text,
-          }),
-        },
-        setText("")
-      );
-    } catch (e) {
-      alert(e);
+          setText("")
+        );
+      } catch (e) {
+        alert(e);
+      }
     }
   };
   return (
