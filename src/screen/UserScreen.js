@@ -1,5 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { TextInput, View, Button, Text, Image } from "react-native";
+import {
+  TextInput,
+  View,
+  Button,
+  Text,
+  Image,
+  ToastAndroid,
+  Alert,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { gStyle } from "../style/gStyle";
 import { useNavigation } from "@react-navigation/native";
@@ -38,34 +46,38 @@ export default function UserScreen() {
 
   const getToken = async () => {
     //метод для отправки данных
-    try {
-      await fetch(baseUrlAuth, {
-        method: "POST",
-        headers: {
-          //заголовок запроса
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          //тело запроса
-          email: name,
-          password: password,
-        }),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          user = data.access_token;
-          save("token", user); //сохраняем токен
-          if (user != null) {
-            console.log(user); //переходим на главный экран
-          } else {
-            //если данные введены не верно
-            Alert.alert("Ошибка", "Неверные данные"); //выводим сообщение
-          }
-        });
-    } catch (error) {
-      ToastAndroid.show("Повторите попытку", ToastAndroid.SHORT); //При ошибке выводит сообщение
-      console.error(error);
+    if (name === "" || password === "") {
+      Alert.alert("Ошибка", "Заполните поля");
+    } else {
+      try {
+        await fetch(baseUrlAuth, {
+          method: "POST",
+          headers: {
+            //заголовок запроса
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            //тело запроса
+            email: name,
+            password: password,
+          }),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            user = data.access_token;
+            save("token", user); //сохраняем токен
+            if (user != null) {
+              console.log(user); //переходим на главный экран
+            } else {
+              //если данные введены не верно
+              Alert.alert("Ошибка", "Неверные данные"); //выводим сообщение
+            }
+          });
+      } catch (error) {
+        ToastAndroid.show("Повторите попытку", ToastAndroid.SHORT); //При ошибке выводит сообщение
+        console.error(error);
+      }
     }
   };
   let urlImage;
@@ -171,7 +183,6 @@ export default function UserScreen() {
       <SafeAreaView>
         {user == null ? (
           <>
-            <Text>Зарегистироваться</Text>
             <View style={gStyle.textInputContainer}>
               <TextInput
                 keyboardType="email-address"
