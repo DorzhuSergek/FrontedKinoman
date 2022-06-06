@@ -7,7 +7,6 @@ import ExplorerScreen from "../screen/ExplorerScreen";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { gStyle } from "../style/gStyle";
 import { ChatandUserNavigator } from "./ChatandUserNavigator";
-
 export const TabBarNavigato = () => {
   const Stack = createStackNavigator();
   const Tab = createBottomTabNavigator();
