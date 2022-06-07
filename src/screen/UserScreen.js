@@ -210,20 +210,22 @@ export default function UserScreen() {
           <View>
             <View>
               <View style={gStyle.containerforUser}>
-                {userItem.avatar === null ? (
-                  <View>
-                    <Image style={gStyle.avatarUser} />
-                  </View>
+                {userItem !== null ? (
+                  <>
+                    <Image
+                      style={gStyle.avatarUser}
+                      source={{ uri: userItem.avatar }}
+                    />
+                    <View style={gStyle.nameEmail}>
+                      <Text style={gStyle.nameUser}>{userItem.Full_Name}</Text>
+                      <Text style={gStyle.emailUser}>{userItem.Email}</Text>
+                    </View>
+                  </>
                 ) : (
-                  <Image
-                    source={{ uri: userItem.avatar }}
-                    style={gStyle.avatarUser}
-                  />
+                  <>
+                    <Image style={gStyle.avatarUser} />
+                  </>
                 )}
-                <View style={gStyle.nameEmail}>
-                  <Text style={gStyle.nameUser}>{userItem.Full_Name}</Text>
-                  <Text style={gStyle.emailUser}>{userItem.Email}</Text>
-                </View>
               </View>
               <Text onPress={pickImage} style={gStyle.buttonChangeImage}>
                 Изменить аватар

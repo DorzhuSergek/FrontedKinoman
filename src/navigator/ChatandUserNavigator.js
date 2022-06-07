@@ -22,6 +22,10 @@ export const ChatandUserNavigator = () => {
           name="RegistrationScreen"
           component={RegistrationScreen}
         />
+        <Stack.Screen
+          name="AuthorizationScreen"
+          component={AuthorizationScreen}
+        />
       </Stack.Navigator>
     </View>
   );
