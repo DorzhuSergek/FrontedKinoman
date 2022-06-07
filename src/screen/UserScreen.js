@@ -21,12 +21,12 @@ import { reloadAsync } from "expo-updates";
 export default function UserScreen() {
   const navigation = useNavigation();
   const [image, setImage] = useState(null);
-  let [user, setUser] = useState();
+  let [user, setUser] = useState([]);
   const [userItem, setUserItem] = useState([]);
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
+  let [avatar, setAvatar] = useState([]);
   const baseUrlAuth = apiConfig.baseUrl + apiConfig.login;
-
   async function save(key, value) {
     await SecureStore.setItemAsync(key, value).then((user) => {
       setUser(user);
@@ -37,13 +37,11 @@ export default function UserScreen() {
     let result = await SecureStore.getItemAsync(key).then((user) =>
       setUser(user)
     );
-    user = result;
   }
   useEffect(() => {
     getValueFor("token");
     getUserMe();
   }, [user]);
-
   const getToken = async () => {
     //метод для отправки данных
     if (name === "" || password === "") {
@@ -81,16 +79,11 @@ export default function UserScreen() {
     }
   };
   let urlImage;
-  async function getValueFor(key) {
-    let result = await SecureStore.getItemAsync(key).then((user) =>
-      setUser(user)
-    );
-    user = result;
-  }
   useEffect(() => {
     getUserMe();
     getValueFor("token");
   }, [user]);
+
   const exit = async () => {
     SecureStore.deleteItemAsync("token").then((user) => {
       setUser(user);
@@ -135,7 +128,6 @@ export default function UserScreen() {
         getUserMe();
       });
   };
-
   const updateImage = async (image) => {
     try {
       await fetch(apiConfig.baseUrl + apiConfig.updateImage, {
@@ -158,7 +150,6 @@ export default function UserScreen() {
     }
   };
   const getUserMe = async () => {
-    getValueFor("token");
     try {
       await fetch(apiConfig.baseUrl + apiConfig.userMe, {
         method: "GET",
@@ -172,9 +163,9 @@ export default function UserScreen() {
           console.log(data);
           setUserItem(data);
         });
-      console.log(user);
     } catch (e) {
       console.log(e);
+      setUserItem(null);
     }
   };
 
@@ -219,10 +210,16 @@ export default function UserScreen() {
           <View>
             <View>
               <View style={gStyle.containerforUser}>
-                <Image
-                  source={{ uri: userItem.avatar }}
-                  style={gStyle.avatarUser}
-                />
+                {userItem.avatar === null ? (
+                  <View>
+                    <Image style={gStyle.avatarUser} />
+                  </View>
+                ) : (
+                  <Image
+                    source={{ uri: userItem.avatar }}
+                    style={gStyle.avatarUser}
+                  />
+                )}
                 <View style={gStyle.nameEmail}>
                   <Text style={gStyle.nameUser}>{userItem.Full_Name}</Text>
                   <Text style={gStyle.emailUser}>{userItem.Email}</Text>
