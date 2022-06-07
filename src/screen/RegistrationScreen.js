@@ -41,7 +41,7 @@ export default function RegistrationScreen() {
           .then((data) => {
             //если все успешно
             Alert.alert("Успешно", "Введите данные заново"); //выводим сообщение
-            navigation.navigate("AuthorizationScreen"); //и переходим на экран авторизации
+            navigation.navigate("UserScreen"); //и переходим на экран авторизации
           });
       } else {
         Alert.alert("Ошибка", "Проверьте поля на идентичность");
