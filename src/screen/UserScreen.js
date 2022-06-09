@@ -7,6 +7,7 @@ import {
   Image,
   ToastAndroid,
   Alert,
+  CheckBox,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { gStyle } from "../style/gStyle";
@@ -21,11 +22,11 @@ import { reloadAsync } from "expo-updates";
 export default function UserScreen() {
   const navigation = useNavigation();
   const [image, setImage] = useState(null);
-  let [user, setUser] = useState([]);
+  let [user, setUser] = useState(null);
   const [userItem, setUserItem] = useState([]);
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
-  let [avatar, setAvatar] = useState([]);
+  const [isSelected, setSelection] = useState(false);
   const baseUrlAuth = apiConfig.baseUrl + apiConfig.login;
   async function save(key, value) {
     await SecureStore.setItemAsync(key, value).then((user) => {
@@ -165,7 +166,6 @@ export default function UserScreen() {
         });
     } catch (e) {
       console.log(e);
-      setUserItem(null);
     }
   };
 
