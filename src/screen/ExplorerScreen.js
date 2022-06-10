@@ -32,7 +32,11 @@ export default function ExplorerScreen() {
   const searchFilter = (text) => {
     if (text) {
       const newData = movieItems.filter((item) => {
-        const itemdata = item.Name ? item.Name.toUpperCase() : "".toUpperCase();
+        const itemdata = item.Name
+          ? item.Name.toUpperCase()
+          : "".toUpperCase() || item.Company
+          ? item.Company.toUpperCase()
+          : "".toUpperCase();
         const textdata = text.toUpperCase();
         return itemdata.indexOf(textdata) > -1;
       });

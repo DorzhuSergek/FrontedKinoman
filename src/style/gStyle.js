@@ -120,8 +120,8 @@ export const gStyle = StyleSheet.create({
     padding: 30,
   },
   backgroundMovieScreen: {
-    width: 415,
-    height: 375,
+    width: 450,
+    height: 400,
     opacity: 0.5,
   },
   posterMovieScreen: {
@@ -221,7 +221,7 @@ export const gStyle = StyleSheet.create({
     width: 70,
     height: 70,
     margin: 5,
-    borderRadius: 100,
+    borderRadius: 20,
   },
   commentsText: {
     color: "#fff",
@@ -299,19 +299,20 @@ export const gStyle = StyleSheet.create({
     color: "white",
     textAlign: "center",
     fontSize: 20,
+    paddingTop: 20,
   },
   chatMessageBox: {
-    width: "70%",
     color: "white",
-    textAlignVertical: "center",
-    marginLeft: 15,
+    textAlignVertical: "auto",
   },
   containerChatMessage: {
     flexDirection: "row",
+    borderRadius: 10,
+    margin: 10,
   },
   chatUser: {
     color: "#969594",
-    marginLeft: 85,
+    marginBottom: 10,
   },
   containerUserData: {
     flexDirection: "row",
@@ -320,7 +321,10 @@ export const gStyle = StyleSheet.create({
   },
   containerChat: {
     backgroundColor: "#242135",
-    margin: 5,
+    margin: 7,
+    borderRadius: 10,
+    borderBottomColor: "#000",
+    borderBottomWidth: 1,
   },
   inputMessage: {
     position: "relative",
@@ -364,8 +368,9 @@ export const gStyle = StyleSheet.create({
   },
   time: {
     color: "#969594",
-    width: "70%",
-    marginLeft: 125,
+    textAlign: "right",
+    maxWidth: "100%",
+    marginLeft: 10,
   },
   search: {
     margin: 15,
@@ -396,7 +401,7 @@ export const gStyle = StyleSheet.create({
     height: 200,
     resizeMode: "cover",
     borderRadius: 10,
-    opacity: 0.5,
+    opacity: 0.4,
   },
   titleNews: {
     position: "absolute",
@@ -413,7 +418,7 @@ export const gStyle = StyleSheet.create({
     padding: 20,
   },
   imageNewsDetail: {
-    width: 200,
+    width: "100%",
     height: 250,
     resizeMode: "contain",
     alignContent: "center",
@@ -435,5 +440,8 @@ export const gStyle = StyleSheet.create({
     textAlign: "right",
     margin: 10,
     color: "white",
+  },
+  containerNews: {
+    margin: 10,
   },
 });

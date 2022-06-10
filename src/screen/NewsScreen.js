@@ -25,7 +25,7 @@ export const NewsScreen = () => {
         <View>
           <Text style={gStyle.chatTitleHeader}>Новости</Text>
           <FlatList
-            style={{ paddingTop: 50 }}
+            style={{ paddingTop: 20 }}
             data={newsItems}
             renderItem={({ item }) => (
               <View>

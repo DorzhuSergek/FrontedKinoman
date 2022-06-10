@@ -61,6 +61,7 @@ export const ChatComponent = () => {
           <Text style={gStyle.chatTitleHeader}>Чат</Text>
           <FlatList
             data={message}
+            style={{ backgroundColor: "#242135", margin: 10, borderRadius: 10 }}
             renderItem={({ item }) => (
               <View style={gStyle.containerChat}>
                 <View style={gStyle.containerChatMessage}>
@@ -70,11 +71,13 @@ export const ChatComponent = () => {
                     }}
                     style={gStyle.avatarComments}
                   />
-                  <Text style={gStyle.chatMessageBox}>{item.Text}</Text>
-                </View>
-                <View style={gStyle.containerUserData}>
-                  <Text style={gStyle.chatUser}>{item.user.Full_Name} </Text>
-                  <Text style={gStyle.time}>{item.user.Email} </Text>
+                  <View>
+                    <View style={gStyle.containerChatMessage}>
+                      <Text style={gStyle.chatUser}>{item.user.Full_Name}</Text>
+                      <Text style={gStyle.time}>{item.time}</Text>
+                    </View>
+                    <Text style={gStyle.chatMessageBox}>{item.Text}</Text>
+                  </View>
                 </View>
               </View>
             )}

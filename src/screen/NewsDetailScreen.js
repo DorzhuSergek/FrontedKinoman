@@ -14,8 +14,10 @@ export default function NewsDetailScreen({ route }) {
             source={{ uri: route.params.imageDetail }}
             style={gStyle.imageNewsDetail}
           ></Image>
-          <Text style={gStyle.newsDesc}>{route.params.desc}</Text>
-          <Text style={gStyle.dateNews}>{route.params.data}</Text>
+          <View style={gStyle.containerNews}>
+            <Text style={gStyle.newsDesc}>{route.params.desc}</Text>
+            <Text style={gStyle.dateNews}>{route.params.data}</Text>
+          </View>
         </SafeAreaView>
       </ScrollView>
     </View>
