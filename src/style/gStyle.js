@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { color } from "react-native-reanimated";
 export const gStyle = StyleSheet.create({
   tabNav: {
     backgroundColor: "#38354B",
@@ -389,5 +390,50 @@ export const gStyle = StyleSheet.create({
     width: 240,
     paddingTop: 15,
     marginLeft: 5,
+  },
+  newsImage: {
+    width: "100%",
+    height: 200,
+    resizeMode: "cover",
+    borderRadius: 10,
+    opacity: 0.5,
+  },
+  titleNews: {
+    position: "absolute",
+    color: "white",
+    marginTop: 20,
+    lineHeight: 18,
+    padding: 20,
+  },
+  dataNews: {
+    position: "absolute",
+    color: "white",
+    alignContent: "flex-end",
+    marginTop: 120,
+    padding: 20,
+  },
+  imageNewsDetail: {
+    width: 200,
+    height: 250,
+    resizeMode: "contain",
+    alignContent: "center",
+  },
+  titlenewsDetail: {
+    color: "white",
+    marginLeft: 20,
+    fontSize: 20,
+    textAlign: "center",
+  },
+  newsContainer: {
+    height: "100%",
+    flexDirection: "row",
+  },
+  newsDesc: {
+    color: "white",
+  },
+  dateNews: {
+    textAlign: "right",
+    margin: 10,
+    color: "white",
   },
 });

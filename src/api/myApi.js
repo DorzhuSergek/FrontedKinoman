@@ -26,6 +26,10 @@ const myApi = {
     const url = "/all_chats";
     return axiosClient.get(url);
   },
+  getNews() {
+    const url = "/news";
+    return axiosClient.get(url);
+  },
 };
 
 export default myApi;

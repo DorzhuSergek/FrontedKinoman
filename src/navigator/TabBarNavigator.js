@@ -7,6 +7,8 @@ import ExplorerScreen from "../screen/ExplorerScreen";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { gStyle } from "../style/gStyle";
 import { ChatandUserNavigator } from "./ChatandUserNavigator";
+import { NewsScreen } from "../screen/NewsScreen";
+import { NewsNavigator } from "./NewsNavigator";
 export const TabBarNavigato = () => {
   const Stack = createStackNavigator();
   const Tab = createBottomTabNavigator();
@@ -46,6 +48,21 @@ export const TabBarNavigato = () => {
               <View>
                 <FontAwesome5
                   name="compass"
+                  size={25}
+                  color={focused ? "red" : "gray"}
+                />
+              </View>
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="NewsScreen"
+          component={NewsNavigator}
+          options={{
+            tabBarIcon: ({ focused }) => (
+              <View>
+                <FontAwesome5
+                  name="newspaper"
                   size={25}
                   color={focused ? "red" : "gray"}
                 />
