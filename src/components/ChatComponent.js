@@ -74,7 +74,19 @@ export const ChatComponent = () => {
                   <View>
                     <View style={gStyle.containerChatMessage}>
                       <Text style={gStyle.chatUser}>{item.user.Full_Name}</Text>
-                      <Text style={gStyle.time}>{item.time}</Text>
+                      <View style={gStyle.containerTime}>
+                        <Text style={gStyle.time}>
+                          {item.time.substr(0, 10)}
+                        </Text>
+                        <View style={{ flexDirection: "row", marginLeft: 40 }}>
+                          <Text style={gStyle.time}>
+                            {Number(item.time.substr(11, 2)) + 6}
+                          </Text>
+                          <Text style={gStyle.time}>
+                            {item.time.substr(13, 3)}
+                          </Text>
+                        </View>
+                      </View>
                     </View>
                     <Text style={gStyle.chatMessageBox}>{item.Text}</Text>
                   </View>

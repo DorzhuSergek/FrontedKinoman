@@ -312,7 +312,7 @@ export const gStyle = StyleSheet.create({
   },
   chatUser: {
     color: "#969594",
-    marginBottom: 10,
+    fontSize: 18,
   },
   containerUserData: {
     flexDirection: "row",
@@ -368,9 +368,6 @@ export const gStyle = StyleSheet.create({
   },
   time: {
     color: "#969594",
-    textAlign: "right",
-    maxWidth: "100%",
-    marginLeft: 10,
   },
   search: {
     margin: 15,
@@ -443,5 +440,10 @@ export const gStyle = StyleSheet.create({
   },
   containerNews: {
     margin: 10,
+  },
+  containerTime: {
+    width: "100%",
+    position: "relative",
+    marginLeft: 160,
   },
 });

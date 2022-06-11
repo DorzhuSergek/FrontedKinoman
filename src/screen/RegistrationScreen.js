@@ -44,7 +44,7 @@ export default function RegistrationScreen() {
             navigation.navigate("UserScreen"); //и переходим на экран авторизации
           });
       } else {
-        Alert.alert("Ошибка", "Проверьте поля на идентичность");
+        Alert.alert("Ошибка", "Пожалуйста, введите поля корректно");
       }
     } catch (error) {
       //в случаи ошибки
