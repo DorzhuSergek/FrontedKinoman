@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 import { color } from "react-native-reanimated";
+import { Dimensions } from "react-native";
 export const gStyle = StyleSheet.create({
   tabNav: {
     backgroundColor: "#38354B",
@@ -130,16 +131,18 @@ export const gStyle = StyleSheet.create({
     position: "absolute",
     marginTop: 205,
     zIndex: 1,
-    marginLeft: 270,
     resizeMode: "contain",
+    alignItems: "flex-end",
+    right: 0,
   },
   titleMoviesScreen: {
     position: "absolute",
     zIndex: 1,
-    marginTop: 240,
+    marginTop: 210,
     color: "white",
     marginLeft: 15,
     fontSize: 21,
+    width: 270,
   },
   companyMoviesScreen: {
     position: "absolute",
@@ -173,9 +176,7 @@ export const gStyle = StyleSheet.create({
   raiting: {
     color: "#777777",
   },
-  textHeaderMovieScreen: {
-    width: 270,
-  },
+
   titleSinopsis: {
     color: "#DEDDDF",
     fontSize: 21,
@@ -294,6 +295,7 @@ export const gStyle = StyleSheet.create({
     marginTop: 315,
     color: "#777777",
     marginLeft: 15,
+    width: 230,
   },
   chatTitleHeader: {
     color: "white",
@@ -303,12 +305,12 @@ export const gStyle = StyleSheet.create({
   },
   chatMessageBox: {
     color: "white",
-    textAlignVertical: "auto",
   },
   containerChatMessage: {
     flexDirection: "row",
     borderRadius: 10,
     margin: 10,
+    position: "relative",
   },
   chatUser: {
     color: "#969594",
@@ -368,6 +370,8 @@ export const gStyle = StyleSheet.create({
   },
   time: {
     color: "#969594",
+    marginLeft: "auto",
+    alignSelf: "flex-end",
   },
   search: {
     margin: 15,
@@ -442,8 +446,8 @@ export const gStyle = StyleSheet.create({
     margin: 10,
   },
   containerTime: {
-    width: "100%",
-    position: "relative",
-    marginLeft: 160,
+    display: "flex",
+    flexDirection: "column",
+    width: "75%",
   },
 });

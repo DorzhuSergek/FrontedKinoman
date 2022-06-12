@@ -78,7 +78,12 @@ export const ChatComponent = () => {
                         <Text style={gStyle.time}>
                           {item.time.substr(0, 10)}
                         </Text>
-                        <View style={{ flexDirection: "row", marginLeft: 40 }}>
+                        <View
+                          style={{
+                            flexDirection: "row",
+                            marginLeft: "auto",
+                          }}
+                        >
                           <Text style={gStyle.time}>
                             {Number(item.time.substr(11, 2)) + 6}
                           </Text>
