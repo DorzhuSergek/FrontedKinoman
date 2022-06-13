@@ -65,10 +65,10 @@ export default function MovieScreen({ route }) {
         </View>
         <View>
           <Text style={gStyle.trailerText}>Коментарии</Text>
-          {/* <CommentsComponents
+          <CommentsComponents
             idMovies={route.params.id}
             key={route.params.id}
-          /> */}
+          />
         </View>
       </ScrollView>
     </View>

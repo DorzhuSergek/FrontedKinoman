@@ -212,10 +212,19 @@ export default function UserScreen() {
               <View style={gStyle.containerforUser}>
                 {userItem !== null ? (
                   <>
-                    <Image
-                      style={gStyle.avatarUser}
-                      source={{ uri: userItem.avatar }}
-                    />
+                    {userItem.avatar !== null ? (
+                      <Image
+                        style={gStyle.avatarUser}
+                        source={{ uri: userItem.avatar }}
+                      />
+                    ) : (
+                      <Image
+                        style={gStyle.avatarUser}
+                        source={{
+                          uri: "https://ks-yanao.ru/image/png/avatar.png",
+                        }}
+                      />
+                    )}
                     <View style={gStyle.nameEmail}>
                       <Text style={gStyle.nameUser}>{userItem.Full_Name}</Text>
                       <Text style={gStyle.emailUser}>{userItem.Email}</Text>
@@ -223,7 +232,12 @@ export default function UserScreen() {
                   </>
                 ) : (
                   <>
-                    <Image style={gStyle.avatarUser} />
+                    <Image
+                      style={gStyle.avatarUser}
+                      source={{
+                        uri: "https://ks-yanao.ru/image/png/avatar.png",
+                      }}
+                    />
                   </>
                 )}
               </View>

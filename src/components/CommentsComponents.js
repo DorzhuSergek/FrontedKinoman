@@ -73,12 +73,24 @@ const CommentsComponents = (props) => {
         renderItem={({ item }) => (
           <View style={gStyle.commentsList}>
             <View style={gStyle.commentsHeader}>
-              <Image
-                source={{
-                  uri: item.user.avatar,
-                }}
-                style={gStyle.avatarComments}
-              />
+              {item.user.avatar !== null ? (
+                <View>
+                  <Image
+                    source={{
+                      uri: item.user.avatar,
+                    }}
+                    style={gStyle.avatarComments}
+                  />
+                </View>
+              ) : (
+                <Image
+                  style={{ width: 70, height: 70, borderRadius: 20 }}
+                  source={{
+                    uri: "https://ks-yanao.ru/image/png/avatar.png",
+                  }}
+                />
+              )}
+
               <Text style={gStyle.nameComments}>{item.user.Full_Name}</Text>
             </View>
             <Text style={gStyle.commentsText}>{item.text}</Text>

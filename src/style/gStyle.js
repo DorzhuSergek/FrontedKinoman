@@ -307,10 +307,8 @@ export const gStyle = StyleSheet.create({
     color: "white",
   },
   containerChatMessage: {
-    flexDirection: "row",
     borderRadius: 10,
     margin: 10,
-    position: "relative",
   },
   chatUser: {
     color: "#969594",
@@ -327,6 +325,7 @@ export const gStyle = StyleSheet.create({
     borderRadius: 10,
     borderBottomColor: "#000",
     borderBottomWidth: 1,
+    flexDirection: "row",
   },
   inputMessage: {
     position: "relative",
@@ -370,7 +369,6 @@ export const gStyle = StyleSheet.create({
   },
   time: {
     color: "#969594",
-    marginLeft: "auto",
     alignSelf: "flex-end",
   },
   search: {
@@ -446,8 +444,8 @@ export const gStyle = StyleSheet.create({
     margin: 10,
   },
   containerTime: {
-    display: "flex",
-    flexDirection: "column",
-    width: "75%",
+    position: "absolute",
+    right: 0,
+    textAlign: "right",
   },
 });

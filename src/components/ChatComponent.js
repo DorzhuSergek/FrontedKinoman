@@ -64,36 +64,82 @@ export const ChatComponent = () => {
             style={{ backgroundColor: "#242135", margin: 10, borderRadius: 10 }}
             renderItem={({ item }) => (
               <View style={gStyle.containerChat}>
-                <View style={gStyle.containerChatMessage}>
-                  <Image
-                    source={{
-                      uri: item.user.avatar,
-                    }}
-                    style={gStyle.avatarComments}
-                  />
+                {/* <View style={gStyle.containerChatMessage}>
                   <View>
-                    <View style={gStyle.containerChatMessage}>
-                      <Text style={gStyle.chatUser}>{item.user.Full_Name}</Text>
-                      <View style={gStyle.containerTime}>
-                        <Text style={gStyle.time}>
-                          {item.time.substr(0, 10)}
-                        </Text>
-                        <View
-                          style={{
-                            flexDirection: "row",
-                            marginLeft: "auto",
-                          }}
-                        >
-                          <Text style={gStyle.time}>
-                            {Number(item.time.substr(11, 2)) + 6}
+                    {item.user.avatar !== null ? (
+                      <Image
+                        source={{
+                          uri: item.user.avatar,
+                        }}
+                        style={gStyle.avatarComments}
+                      />
+                    ) : (
+                      <Image
+                        style={{ width: 70, height: 70, borderRadius: 20 }}
+                        source={{
+                          uri: "https://ks-yanao.ru/image/png/avatar.png",
+                        }}
+                      />
+                    )}
+                    <View>
+                      <View style={gStyle.containerChatMessage}>
+                        <View style={{ flexDirection: "row" }}>
+                          <Text style={gStyle.chatUser}>
+                            {item.user.Full_Name}
                           </Text>
-                          <Text style={gStyle.time}>
-                            {item.time.substr(13, 3)}
-                          </Text>
+                          <View style={gStyle.containerTime}>
+                            <Text style={gStyle.time}>
+                              {item.time.substr(0, 10)}
+                            </Text>
+                            <View
+                              style={{
+                                flexDirection: "row",
+                                marginLeft: "auto",
+                              }}
+                            >
+                              <Text style={gStyle.time}>
+                                {Number(item.time.substr(11, 2)) + 6}
+                              </Text>
+                              <Text style={gStyle.time}>
+                                {item.time.substr(13, 3)}
+                              </Text>
+                            </View>
+                          </View>
                         </View>
                       </View>
+                      <Text style={gStyle.chatMessageBox}>{item.Text}</Text>
                     </View>
-                    <Text style={gStyle.chatMessageBox}>{item.Text}</Text>
+                  </View>
+                </View> */}
+
+                <View>
+                  {item.user.avatar !== null ? (
+                    <Image
+                      source={{
+                        uri: item.user.avatar,
+                      }}
+                      style={gStyle.avatarComments}
+                    />
+                  ) : (
+                    <Image
+                      style={gStyle.avatarComments}
+                      source={{
+                        uri: "https://ks-yanao.ru/image/png/avatar.png",
+                      }}
+                    />
+                  )}
+                </View>
+                <View>
+                  <Text style={gStyle.chatUser}>{item.user.Full_Name}</Text>
+                  <Text style={gStyle.chatMessageBox}>{item.Text}</Text>
+                </View>
+                <View style={gStyle.containerTime}>
+                  <Text style={gStyle.time}>{item.time.substr(0, 10)}</Text>
+                  <View style={{ flexDirection: "row" }}>
+                    <Text style={gStyle.time}>
+                      {Number(item.time.substr(11, 2)) + 6}
+                    </Text>
+                    <Text style={gStyle.time}>{item.time.substr(13, 3)}</Text>
                   </View>
                 </View>
               </View>
