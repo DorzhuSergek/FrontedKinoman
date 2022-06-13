@@ -21,28 +21,39 @@ export default function RegistrationScreen() {
         Alert.alert("Ошибка", "Заполните поля");
       }
       if (password !== "" && password2 !== "") {
-        await fetch(baseUrlAuth, {
-          //логика регистрации пользователя
-          method: "POST",
-          headers: {
-            //заголовок запроса
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            //тело запроса
-            Full_Name: name,
-            Email: email,
-            password: password,
-            password2: password2,
-          }),
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            //если все успешно
-            Alert.alert("Успешно", "Введите данные заново"); //выводим сообщение
-            navigation.navigate("UserScreen"); //и переходим на экран авторизации
-          });
+        let reg =
+          /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        if (reg.test(email) === false) {
+          Alert.alert("Ошибка", "Введите корректную почту");
+          return false;
+        } else {
+          if (password.length < 6) {
+            Alert.alert("Ошибка", "Пароль должен состоять из шести символов");
+          } else {
+            await fetch(baseUrlAuth, {
+              //логика регистрации пользователя
+              method: "POST",
+              headers: {
+                //заголовок запроса
+                Accept: "application/json",
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                //тело запроса
+                Full_Name: name,
+                Email: email,
+                password: password,
+                password2: password2,
+              }),
+            })
+              .then((response) => response.json())
+              .then((data) => {
+                //если все успешно
+                Alert.alert("Успешно", "Введите данные заново"); //выводим сообщение
+                navigation.navigate("UserScreen"); //и переходим на экран авторизации
+              });
+          }
+        }
       } else {
         Alert.alert("Ошибка", "Пожалуйста, введите поля корректно");
       }
