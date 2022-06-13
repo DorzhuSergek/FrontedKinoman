@@ -20,7 +20,7 @@ export default function RegistrationScreen() {
         //валидация на заполненность полей
         Alert.alert("Ошибка", "Заполните поля");
       }
-      if (password == password2) {
+      if (password !== "" && password2 !== "") {
         await fetch(baseUrlAuth, {
           //логика регистрации пользователя
           method: "POST",
@@ -48,43 +48,7 @@ export default function RegistrationScreen() {
       }
     } catch (error) {
       //в случаи ошибки
-      alert(e); //выводим проблему на экран
-    }
-  };
-  const getToken = async () => {
-    //метод для отправки данных
-    if (name === "" || password === "") {
-      Alert.alert("Ошибка", "Заполните поля");
-    } else {
-      try {
-        await fetch(baseUrlAuth, {
-          method: "POST",
-          headers: {
-            //заголовок запроса
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            //тело запроса
-            Email: name,
-            password: password,
-          }),
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            user = data.access_token;
-            save("token", user); //сохраняем токен
-            if (user != null) {
-              console.log(user); //переходим на главный экран
-            } else {
-              //если данные введены не верно
-              Alert.alert("Ошибка", "Неверные данные"); //выводим сообщение
-            }
-          });
-      } catch (error) {
-        ToastAndroid.show("Повторите попытку", ToastAndroid.SHORT); //При ошибке выводит сообщение
-        console.error(error);
-      }
+      alert(error); //выводим проблему на экран
     }
   };
   return (
